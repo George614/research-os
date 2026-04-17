@@ -1,0 +1,1552 @@
+{
+  "answer": "To evaluate complex, long-horizon search tasks, Mind2Web 2 employs the Agent-as-a-Judge framework to automatically assess both the correctness and source attribution of time-varying answers [1, 2]. \n\n**(a) End-to-end Agent-as-a-Judge framework**\nThe framework capitalizes on a \"generation-verification asymmetry\": while generating a comprehensive answer across multiple websites is highly complex, verifying that answer against predefined task requirements is tractable [2]. To achieve this, **a task-specific judge agent is constructed as an agentic workflow wrapped in a Python script** [3]. This judge agent takes the system's generated answer text and source citations as input, evaluates fine-grained criteria at the lowest level, and calculates a final task score by aggregating the results upwards through a hierarchical structure [3]. \n\n**(b) Tree-structured rubric design**\nThe evaluation logic for each task is mapped out into a **tree-structured rubric, breaking down complex goals into hierarchical evaluation nodes** [2]. At the bottom, leaf nodes represent basic criteria assessed through straightforward binary verification (0 for fail, 1 for pass) [2, 4]. The tree utilizes three specific types of nodes:\n*   **Critical nodes:** These represent essential criteria or mandatory constraints. If a critical node fails, its entire parent subtree immediately receives a score of zero, ensuring models are not rewarded for fundamentally flawed solutions [4, 5].\n*   **Non-critical nodes:** These allow for partial scoring at the parent node by independently assessing different sub-requirements (e.g., finding multiple specific items) [4, 6].\n*   **Sequential nodes:** These enforce logical dependencies between steps. If a sequential node fails an earlier requisite step, it short-circuits the evaluation and automatically fails any subsequent dependent nodes [6].\n\n**(c) Extractor and Verifier tools**\nTo conduct the binary verifications at the leaf nodes, the judge agents rely primarily on two LLM-based tools [3]. The **Extractor parses the lengthy answer text to pull out targeted, structured information**, such as item names, URLs, and prices [3]. Following this, the **Verifier examines the extracted claims alongside evidence\u2014like screenshots from the cited webpages\u2014to objectively determine if the statements are true** and accurately backed by the source [3, 7].\n\n**(d) Self-debug pipeline for judge creation**\nManually crafting these highly detailed evaluation scripts is prohibitively labor-intensive [7]. To scale the process, the authors utilize a modular Python toolkit and an **LLM-based agentic code generation pipeline to produce an initial draft of the judge scripts** [7]. These generated scripts then undergo **iterative autonomous refinements using self-debug and self-reflection** to automatically correct minor or common errors [7]. Finally, the scripts are rigorously validated through a two-stage human refinement process to guarantee correctness and broad generalizability [7].\n\n**(e) Score aggregation**\nScores are propagated from the leaf nodes to the root using a **\"gate-then-average\" strategy** [6, 8]. Critical nodes act as strict gating conditions; they warrant the meaningfulness of the evaluation but do not directly contribute to the mathematical averaging process [8]. If an internal node consists entirely of critical child nodes, it only receives a score of 1 if every single child passes [8]. Meanwhile, the successes of non-critical nodes are averaged to award partial credit [8]. At the root node, this aggregation yields two main metrics: **Partial Completion** (the average root node score across all tasks) and **Success Rate** (the percentage of tasks achieving a perfect score of 1) [9].",
+  "conversation_id": "80540724-b627-4699-b706-3e177c10082a",
+  "turn_number": 1,
+  "is_follow_up": true,
+  "references": [
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 1,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "aedaaa20-f059-4416-8f78-8441a3fd14c5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 2,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "11b2cbc5-e3c1-4aaf-a478-2a369c4490de"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 3,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "c9ef2d36-e25b-4a5a-8b69-37aa6a661482"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 4,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "bc41bf66-b512-4ba9-bb2c-f9e2b3c53f1c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 5,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "99fb3c3a-cc24-4125-b51b-2a5bfd3b8ae0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 6,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "d9d10357-d27b-4cdf-98ad-23e6b447870d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 7,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "9f5ff565-4f84-4747-b3ad-87c317f1e4fd"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 8,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "04c5b391-e494-419a-a06e-52c1ea28fe11"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 9,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "7cfedd6b-5fcd-4f94-b9f6-31db0ed5844b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 10,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "a7540e1e-8f4c-4ad3-9516-cf33ac0038ac"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 11,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "de3f67b6-5cec-4c4b-be11-227af96c6c13"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 12,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "4a8c1b79-4fa4-4c8a-a037-a2b9faf76a4e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 13,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "9ebd7e3e-a066-407c-823e-89a8e169bc6a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 14,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "6b1a529a-720f-4233-a096-2fd218937546"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 15,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "33d12759-8b9f-4b24-aded-3c434ed5d6f1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 16,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "f52aa15a-c6e1-46de-8b28-f30a88bdcb72"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 17,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "92e5971a-e1f5-4d13-ab67-3013d4100ce3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 18,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "64a6c421-49e6-42cf-8fe0-f65e396bc03f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 19,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "d9895687-f058-46ea-b37a-5bb39ccb355f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 20,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "12558b5f-82c6-45fc-97ef-e621944e1b82"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 21,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "db4ee459-d169-41c2-8e33-1d04383203c5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 22,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "786a282f-3426-46be-a7c7-c1f00f2bca19"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 23,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "9e81a003-2c73-4b9d-b74c-c63874b9cc6e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 24,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "23fd58ec-4423-484b-bd38-94a74181e02c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 25,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "b8ddb6b4-31d5-456d-9afd-49a1ae6f8f3f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 26,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "11222cff-74f3-41ac-b3d2-b997ff13c697"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 27,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "360507de-102a-4b13-90f7-03679d7452c0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 28,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "04966a04-d8e2-4d2e-a1ce-98ab813904bc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 29,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "ff0fe9c7-7cfd-4a9a-bc77-1786af976e69"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 30,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "9cc32fa8-7f8d-468d-a48a-c5172ce31cec"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 31,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "9552ecda-6940-4bef-90c9-361002d6aa62"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 32,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "72c905b1-028f-48bb-834a-e096125e0126"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 33,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "7e53eb2e-af07-4293-bad7-e01eb0bf0471"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 34,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "c3dc1f81-5d61-4e2a-adef-da3ec5ee3cad"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 35,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "fb592504-fc57-4b3b-a740-0ecd7b77dce3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 36,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "63a32f03-70a5-4052-8e1b-8beacf04e36d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 37,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "7f1a9cbf-221a-4c49-8c4f-57f0d68e1968"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 38,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "66affc8b-9a8f-4272-b82a-00bcd447e0d6"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 39,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "948e3da3-39b6-415f-a2bc-b3b4d7b73ad0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 40,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "45b0cb08-dab7-451f-a621-f8b10d1fc3ee"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 41,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "ad7cd9fa-3198-4dc8-aa1d-c4a8d3f27398"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 42,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "e6804b08-745e-4846-a60f-e8621779e5e4"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 43,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "473ec6ab-df3c-4bb8-83af-54de0324ee5b"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 44,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "3148abbb-9259-4e81-89e4-fb4888a79e62"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 45,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "04b0de92-d8e4-4a85-bf04-c98ba316fd2b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 46,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "0ac16b01-3822-479f-bf65-5d6d46100d62"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 47,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "054c122b-f707-4097-94d7-4f4ac578df09"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 48,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "bbd9c0e3-1115-4f2a-8a69-7ac0de1789b2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 49,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "184ab2ef-eb43-479f-b08e-b54b987c071a"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 50,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "d2092eea-01ea-4d23-a64d-6cdd0c400c9d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 51,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "7a905016-7049-4712-92cf-e9467ceda69f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 52,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "a48d0fd5-1618-4b86-a73b-c177c41a12a6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 53,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "f6585e66-48d0-471f-b497-41f9e383eeaf"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 54,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "30c79f45-03c8-47a1-a469-5b0763107262"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 55,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "ec3d13e1-927c-404d-b69c-43e5b5724cef"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 56,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "6144f77c-d919-45a2-a0b6-d131df5137e5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 57,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "01590040-2d54-4c7f-bbce-f9bbe3af5d8e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 58,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "6c64bb01-ec68-45f4-8120-b9d13a20fd22"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 59,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "720b965b-e026-4b56-88ab-0757a7205c4c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 60,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "52f7ffdb-a6e3-4762-9d73-8d6f2e312cf0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 61,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "9f39a612-45ef-4dcc-89da-6458e15836f2"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 62,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "7ae91c67-4fb5-44c9-9856-0226b8312d5d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 63,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "55c8c0b2-ae71-494f-951b-9e65b69b3984"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 64,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "f52d728a-fc56-4aa1-8d9d-bddf814d2f4b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 65,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "bfcf8f54-790e-4304-afc5-4ac415d48c43"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 66,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "2cca6483-fc71-4c07-b7f3-2e907bb5e499"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 67,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "047dc344-5630-4532-8b19-c6a2d8786877"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 68,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "c89eb4c1-a321-4283-a737-409508025164"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 69,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "d40f13bd-aa83-4626-81ae-7e6e5922d48b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 70,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "2f2b8f54-4d01-465d-a98a-9eff00c367dc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 71,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "4e260eca-9615-48d0-894c-a06bee7594b1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 72,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "57eb9867-1cb2-4f72-9510-cc9b7da6924b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 73,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "4e9ed136-f4fd-48c5-be3d-75aef9ddb455"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 74,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "34cb2879-0429-4ddc-a0fd-8c27af8e308f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 75,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "cd6c3a3e-39d9-459e-9634-fde8c2bbd94e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 76,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "fd2a74b4-98aa-47d5-864c-81ccb3a07136"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 77,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "f74e4ade-239a-4ec9-a64c-b7301195b441"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 78,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "77ed729b-6497-4241-b017-dba3aab528ed"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 79,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "530fe67f-5efc-4185-af26-3cc45a37d769"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 80,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "fcbb23bf-f4cc-44a4-9af9-d2f1bd0d6ed1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 81,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "68cb59b2-1b25-4d59-abf4-8e13ae17a894"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 82,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "a693aba1-6cb2-419d-9e29-39bbaf41c1dc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 83,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "a9c3f39e-92c5-4f1e-9eb3-eb2ec1af2c07"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 84,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "7dd1c83d-7853-484e-81d9-13e04f4165b9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 85,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "e42012c1-8236-4c38-94ab-df55cb750af7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 86,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "1a11cb2e-bb37-46e9-9b7d-a2f9f32be10b"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 87,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "925f95af-cf46-432e-be3d-df464c3e70cf"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 88,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "18a321fb-da1a-4ad9-9018-6ed58a5bdd52"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 89,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "c2557546-c08a-42b7-8e84-2c28ca0ff6ab"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 90,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "9122fea8-ebc6-481d-9f43-1065b306912c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 91,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "d8c1c5a0-bd73-46bf-b02f-69d219da6dd6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 92,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "9927d766-c8c8-425c-b6a9-6af2feb443cb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 93,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "e745848a-b52a-4918-a53c-2a830bebf7fb"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 94,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "d7cfcc4a-6636-4f62-9040-4551dcfa4d0e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 95,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "fb5f1dec-2680-4b07-8a69-6d1e6c404155"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 96,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "76699417-8e50-4a83-a999-fe8b52c0b36b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 97,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "8999031c-fce0-4edf-81c5-bca15b43fdb8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 98,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "042d9afb-0438-4c81-ae61-ff0a58de017c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 99,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "7e57f1ee-99f2-4bb7-b937-15a51513865d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 100,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "6c763892-b127-47a2-a275-5da4fef6e3c1"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 101,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "58aaf57e-6653-4e79-af43-be966c305eeb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 102,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "c07ddc5b-191e-47a2-ba99-3f10b0291525"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 103,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "4fa31723-fdc4-4d3b-bd81-157e00410731"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 104,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "06901a50-8e00-4df8-9246-db65cd0ce24b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 105,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "13a5dbbf-ef32-4647-8779-def62656b5ff"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 106,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "feeef248-1e3b-4950-8ecb-2002df6da3e5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 107,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "84f60a07-5917-40bd-ada6-399480c58320"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 108,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "564bcb30-06fa-443b-b6c0-438c1fac9033"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 109,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "5fdde308-4711-4f99-a888-fcff8343bc5f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 110,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "6f48e097-928a-45be-9e2b-1419f12ddc60"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 111,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "91ae786c-6052-40c9-be8c-72079e2ab53b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 112,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "ebad815f-c4a9-407a-b7f8-3d89baa25187"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 113,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "71fce728-f705-42dd-bb9b-baf717c5c593"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 114,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "e4108327-7000-4157-b93f-b4203218fe14"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 115,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "352070cb-c063-4724-a86e-0ada99e84a65"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 116,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "b6c8a7ef-ee33-4b28-9cc6-621cad12638f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 117,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "6d88d29e-e214-43be-83fc-891311bc3d50"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 118,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "25951c65-576b-40e5-abc8-35311cfa7c7f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 119,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "dafad0d3-74f6-483e-b2a1-6a137f2de168"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 120,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "2b388637-3a35-4a9e-a98f-cc1a13d459a6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 121,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "2a6e8574-65bd-4e9a-a252-90786a17212d"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 122,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "1af8c881-139b-45ac-9a56-8b153583657e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 123,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "3a4fbbd6-ff87-4ef3-8c10-fb8a427c6f51"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 124,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "79e0cb1a-8acc-4603-b0cc-57b1488c493a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 125,
+      "cited_text": "Intuitively, the score aggregation employs a gate-then-average strategy: critical nodes serve as gating conditions when paired with non-critical nodes. In practice, critical nodes often represent basic and essential constraints rather than incremental progress, thus their scores do not directly contribute to the averaging process for partial scoring, but instead function solely to warrant the meaningfulness of aggregating scores from non-critical nodes. Finally, if a node only contains critical child nodes, which indicates that each child represents a necessary condition for the parent criterion, the score of the parent node directly depends on the passing of all these critical child nodes (e.g., in Figure 2, the wardrobe node ( b) gets a score 1 only if all the child nodes pass; otherwise 0).",
+      "start_char": 20130,
+      "end_char": 20934,
+      "chunk_id": "646b23e8-6520-4028-8c88-310d2756c142"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 126,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "2bd053eb-72cc-4503-990f-cc49ba76aa92"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 127,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "f441bbf0-f864-4444-b9ec-e2d30de7fba6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 128,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "8dd2aa56-e946-4602-9756-8b9b7d2244ed"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 129,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "561c17ee-a73d-44ea-ac35-cc313a1737fc"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 130,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "c06f9ea9-e515-4bd7-a122-5de0730a5999"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 131,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "989efd8f-4b06-4e54-9b02-002855dcc54f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 132,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "057e87e4-c328-4e1b-90ad-48bef3c470a9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 133,
+      "cited_text": "Intuitively, the score aggregation employs a gate-then-average strategy: critical nodes serve as gating conditions when paired with non-critical nodes. In practice, critical nodes often represent basic and essential constraints rather than incremental progress, thus their scores do not directly contribute to the averaging process for partial scoring, but instead function solely to warrant the meaningfulness of aggregating scores from non-critical nodes. Finally, if a node only contains critical child nodes, which indicates that each child represents a necessary condition for the parent criterion, the score of the parent node directly depends on the passing of all these critical child nodes (e.g., in Figure 2, the wardrobe node ( b) gets a score 1 only if all the child nodes pass; otherwise 0).",
+      "start_char": 20130,
+      "end_char": 20934,
+      "chunk_id": "e9bf44e9-cfa8-412d-99ee-1f0a07158cd5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 134,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "cffa17e8-2c04-457c-a0e7-1156f7cb121d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 135,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "d1fc6ae6-3751-48da-9853-119b60d83bcf"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 136,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "0f6f9f2a-8ab1-4e8c-b274-717fb1f95a86"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 137,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "1ed23f9b-74ec-4246-a9a3-c911ab09ac98"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 138,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "33beb612-0d64-44b5-91a6-a7aba22410e9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 139,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "f1d9f109-2ada-4e7d-8837-10a3142a84a5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 140,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "0755dece-a4d7-481e-9ccb-4a5090b3bb10"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 141,
+      "cited_text": "Intuitively, the score aggregation employs a gate-then-average strategy: critical nodes serve as gating conditions when paired with non-critical nodes. In practice, critical nodes often represent basic and essential constraints rather than incremental progress, thus their scores do not directly contribute to the averaging process for partial scoring, but instead function solely to warrant the meaningfulness of aggregating scores from non-critical nodes. Finally, if a node only contains critical child nodes, which indicates that each child represents a necessary condition for the parent criterion, the score of the parent node directly depends on the passing of all these critical child nodes (e.g., in Figure 2, the wardrobe node ( b) gets a score 1 only if all the child nodes pass; otherwise 0).",
+      "start_char": 20130,
+      "end_char": 20934,
+      "chunk_id": "0597e4bb-673a-4a33-b0b7-70f164ab4f22"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 142,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "1dd98f7d-30d2-4407-a48a-e0ec9465891d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 143,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "7f974adc-8c17-40f1-821c-6980ba03e57a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 144,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "cb9608dc-fd5c-4eff-8db5-de1de8670313"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 145,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "a37edfc8-cc62-48de-b8d0-ef54c1c2c286"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 146,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "6e7fd338-264b-4989-8eb4-4c3a4221acac"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 147,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "04df059c-c8cd-45dd-a093-20d96b36960e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 148,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "3c754bea-b8e6-429d-8e12-6b5711f01322"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 149,
+      "cited_text": "Intuitively, the score aggregation employs a gate-then-average strategy: critical nodes serve as gating conditions when paired with non-critical nodes. In practice, critical nodes often represent basic and essential constraints rather than incremental progress, thus their scores do not directly contribute to the averaging process for partial scoring, but instead function solely to warrant the meaningfulness of aggregating scores from non-critical nodes. Finally, if a node only contains critical child nodes, which indicates that each child represents a necessary condition for the parent criterion, the score of the parent node directly depends on the passing of all these critical child nodes (e.g., in Figure 2, the wardrobe node ( b) gets a score 1 only if all the child nodes pass; otherwise 0).",
+      "start_char": 20130,
+      "end_char": 20934,
+      "chunk_id": "11934beb-8e19-4434-a6d7-01d620fd74b1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 150,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "6a7cc139-9a5b-44a1-9c93-c1e25d114a8d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 151,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "51f36b37-b604-45c2-8e7c-dc18c1017348"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 152,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "6e58a0fa-b988-403d-a661-1a99df1260c4"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 153,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "49668627-a5a0-4bd7-9b56-c2442df5572b"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 154,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "97e11256-0b1b-4d19-9202-d4005c7928e0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 155,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "38c90de9-fc1a-410e-8060-dcc4f29748b5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 156,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "56a7b425-ae70-40cb-97b8-e3a845cf68d1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 157,
+      "cited_text": "Intuitively, the score aggregation employs a gate-then-average strategy: critical nodes serve as gating conditions when paired with non-critical nodes. In practice, critical nodes often represent basic and essential constraints rather than incremental progress, thus their scores do not directly contribute to the averaging process for partial scoring, but instead function solely to warrant the meaningfulness of aggregating scores from non-critical nodes. Finally, if a node only contains critical child nodes, which indicates that each child represents a necessary condition for the parent criterion, the score of the parent node directly depends on the passing of all these critical child nodes (e.g., in Figure 2, the wardrobe node ( b) gets a score 1 only if all the child nodes pass; otherwise 0).",
+      "start_char": 20130,
+      "end_char": 20934,
+      "chunk_id": "7ccc7578-b5cb-41dd-812f-dcdc485cc94c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 158,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "3196a901-30c6-43a1-819e-07a929ef0661"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 159,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "cfbeba11-8ad7-419b-94ba-c0f2bfaff545"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 160,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "3e591426-4df3-446b-bee1-801f5f443d47"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 161,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "df431090-ef3a-4abb-8675-62697d23188a"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 162,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "1b395c32-a9ac-4230-84a8-1f1d2be3809c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 163,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "2caf819c-2119-4848-b41e-12a7e7cfc1d9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 164,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "5acd5781-9069-4af7-bc2f-16fc5d199bdb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 165,
+      "cited_text": "Intuitively, the score aggregation employs a gate-then-average strategy: critical nodes serve as gating conditions when paired with non-critical nodes. In practice, critical nodes often represent basic and essential constraints rather than incremental progress, thus their scores do not directly contribute to the averaging process for partial scoring, but instead function solely to warrant the meaningfulness of aggregating scores from non-critical nodes. Finally, if a node only contains critical child nodes, which indicates that each child represents a necessary condition for the parent criterion, the score of the parent node directly depends on the passing of all these critical child nodes (e.g., in Figure 2, the wardrobe node ( b) gets a score 1 only if all the child nodes pass; otherwise 0).",
+      "start_char": 20130,
+      "end_char": 20934,
+      "chunk_id": "1d0fa189-e529-42b6-8d68-1424cec3b418"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 166,
+      "cited_text": "Formally, let v be a node in the rubric tree with child nodes C( v). We partition child nodes into critical nodes",
+      "start_char": 20934,
+      "end_char": 21048,
+      "chunk_id": "5ace44e6-948d-4a16-b4fd-8ed6318705ee"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 167,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "4c978b36-a431-4d5d-bf61-ed356e69788a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 168,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "6f931abe-481a-490e-84ee-df53db449bf8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 169,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "7dbad7ba-a704-4c18-adbd-1a00d2bd1b05"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 170,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "29f04990-04aa-4129-81f3-df2b754fe4bd"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 171,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "ad8bf2f2-f7ca-4595-94c7-82e2813d76f2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 172,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "cb5e43cd-a165-4bcc-923d-e1ea2ec830e1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 173,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "19b75b29-e270-4739-a4c8-fa4c2eb6d033"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 174,
+      "cited_text": "Intuitively, the score aggregation employs a gate-then-average strategy: critical nodes serve as gating conditions when paired with non-critical nodes. In practice, critical nodes often represent basic and essential constraints rather than incremental progress, thus their scores do not directly contribute to the averaging process for partial scoring, but instead function solely to warrant the meaningfulness of aggregating scores from non-critical nodes. Finally, if a node only contains critical child nodes, which indicates that each child represents a necessary condition for the parent criterion, the score of the parent node directly depends on the passing of all these critical child nodes (e.g., in Figure 2, the wardrobe node ( b) gets a score 1 only if all the child nodes pass; otherwise 0).",
+      "start_char": 20130,
+      "end_char": 20934,
+      "chunk_id": "6ec2c90b-be9a-4b84-9db1-cc320478b299"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 175,
+      "cited_text": "Formally, let v be a node in the rubric tree with child nodes C( v). We partition child nodes into critical nodes",
+      "start_char": 20934,
+      "end_char": 21048,
+      "chunk_id": "44992220-5a29-4418-9008-020bad084086"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 176,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "4c978b36-a431-4d5d-bf61-ed356e69788a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 177,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "6f931abe-481a-490e-84ee-df53db449bf8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 178,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "7dbad7ba-a704-4c18-adbd-1a00d2bd1b05"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 179,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "29f04990-04aa-4129-81f3-df2b754fe4bd"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 180,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "ad8bf2f2-f7ca-4595-94c7-82e2813d76f2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 181,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "cb5e43cd-a165-4bcc-923d-e1ea2ec830e1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 182,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "19b75b29-e270-4739-a4c8-fa4c2eb6d033"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 183,
+      "cited_text": "Intuitively, the score aggregation employs a gate-then-average strategy: critical nodes serve as gating conditions when paired with non-critical nodes. In practice, critical nodes often represent basic and essential constraints rather than incremental progress, thus their scores do not directly contribute to the averaging process for partial scoring, but instead function solely to warrant the meaningfulness of aggregating scores from non-critical nodes. Finally, if a node only contains critical child nodes, which indicates that each child represents a necessary condition for the parent criterion, the score of the parent node directly depends on the passing of all these critical child nodes (e.g., in Figure 2, the wardrobe node ( b) gets a score 1 only if all the child nodes pass; otherwise 0).",
+      "start_char": 20130,
+      "end_char": 20934,
+      "chunk_id": "6ec2c90b-be9a-4b84-9db1-cc320478b299"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 184,
+      "cited_text": "Formally, let v be a node in the rubric tree with child nodes C( v). We partition child nodes into critical nodes",
+      "start_char": 20934,
+      "end_char": 21048,
+      "chunk_id": "44992220-5a29-4418-9008-020bad084086"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 185,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "4c978b36-a431-4d5d-bf61-ed356e69788a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 186,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "6f931abe-481a-490e-84ee-df53db449bf8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 187,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "7dbad7ba-a704-4c18-adbd-1a00d2bd1b05"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 188,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "29f04990-04aa-4129-81f3-df2b754fe4bd"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 189,
+      "cited_text": "A critical feature of this logic is the use of \"critical\" vs \"non-critical\" nodes. Critical nodes represent mandatory task requirements or safety constraints; failure at a critical node zeroes out the entire subtree score, ensuring that agents are not rewarded for \"mostly correct\" solutions that fail in fundamental ways.[29, 31] This hierarchical approach provides a level of granularity and interpretability that is impossible with scalar-only reward models.[30, 32]",
+      "start_char": 10398,
+      "end_char": 10867,
+      "chunk_id": "ad8bf2f2-f7ca-4595-94c7-82e2813d76f2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 190,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "cb5e43cd-a165-4bcc-923d-e1ea2ec830e1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 191,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "19b75b29-e270-4739-a4c8-fa4c2eb6d033"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 192,
+      "cited_text": "Intuitively, the score aggregation employs a gate-then-average strategy: critical nodes serve as gating conditions when paired with non-critical nodes. In practice, critical nodes often represent basic and essential constraints rather than incremental progress, thus their scores do not directly contribute to the averaging process for partial scoring, but instead function solely to warrant the meaningfulness of aggregating scores from non-critical nodes. Finally, if a node only contains critical child nodes, which indicates that each child represents a necessary condition for the parent criterion, the score of the parent node directly depends on the passing of all these critical child nodes (e.g., in Figure 2, the wardrobe node ( b) gets a score 1 only if all the child nodes pass; otherwise 0).",
+      "start_char": 20130,
+      "end_char": 20934,
+      "chunk_id": "6ec2c90b-be9a-4b84-9db1-cc320478b299"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 193,
+      "cited_text": "Formally, let v be a node in the rubric tree with child nodes C( v). We partition child nodes into critical nodes",
+      "start_char": 20934,
+      "end_char": 21048,
+      "chunk_id": "44992220-5a29-4418-9008-020bad084086"
+    }
+  ]
+}

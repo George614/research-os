@@ -1,0 +1,1208 @@
+{
+  "answer": "| Category | Metric | Value / Detail |\n| :--- | :--- | :--- |\n| **(a) Judge-Human Alignment & Accuracy** | **Judge Accuracy** | The automated judge agents achieved an **exceptional accuracy of 99.03%** [1]. |\n| | **Error Breakdown** | Out of 720 leaf-node verifications, 35 discrepancies were found between human evaluators and the judge agents. Upon review, **27 of these discrepancies were human errors**, leaving only 7 actual errors by the automated judge [1, 2]. |\n| | **Rubric Agreement** | Human evaluators fully agreed with **100% of the 15 randomly sampled rubrics** designed for the judge agents [2]. |\n| **(b) Headline Performance** *(Note: Exact per-system rows are omitted from the source text, but bounds are provided)* | **Maximum Agent Success Rate** | Agent systems achieved a maximum success rate of **up to 28%** [3]. |\n| | **Top System Performance** | The best-performing system, **OpenAI Deep Research, achieved 50\u201370% of human performance** [4]. |\n| | **Top System Time** | OpenAI Deep Research completed tasks in **half the time** of human participants [4]. |\n| | **System Comparisons** | Deep Research systems generally outperformed commercial search APIs (ChatGPT Search, Perplexity Pro) and web agents (OpenAI Operator) due to better handling of long-horizon contexts and tools [5]. |\n| **(c) Human Performance** | **Human Success Rate** | Humans achieved a success rate of **54%** [3]. |\n| | **Time & Search Volume** | Tasks took humans **up to 1 hour** to complete, requiring visits to as many as **31 websites and 375 webpages** [6, 7]. |\n| | **Study Setup** | Evaluated on a random subset of 30 tasks (\"Subset-30\") by 7 participants, with 3 different participants attempting each task [6]. |\n| **(d) Cost & Compute** | **Human Labor Cost** | The benchmark's creation required **over 1,000 hours of expert human labor** to construct 130 tasks (10 development, 120 test) and their evaluation scripts [6-8]. |\n| | **Task/Rubric Complexity** | The evaluation rubric trees are highly complex, averaging **50 nodes**, with a maximum of **603 nodes and up to 6 layers** [6, 9]. |\n| **(e) Inter-Annotator Agreement** | **Evaluator Reliability** | The evaluation phase demonstrated that human annotators frequently suffer from cognitive fatigue and limited working memory on these long tasks, making 27 careless annotation errors that the automated judge agent avoided [2, 4]. |",
+  "conversation_id": "80540724-b627-4699-b706-3e177c10082a",
+  "turn_number": 1,
+  "is_follow_up": true,
+  "references": [
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 1,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "bb7b0f83-5597-4710-83a0-2d5773cdb94a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 2,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "f01c1ba5-01f0-4c51-956f-445810b7aaaa"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 3,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "8287cd18-b84e-4699-a665-c8083f92d67a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 4,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "eb557344-820a-4c72-92ea-507039d71ade"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 5,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "2650ee8d-3728-403c-8d38-2c1f888725c4"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 6,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "937b7ad0-d679-4496-906e-ede150275614"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 7,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "a8cccbcf-a656-4f76-983e-505decd74eb8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 8,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "628bfa7d-de47-4711-8bf4-c849002f3d72"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 9,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "d1edd95a-4e01-4ebc-9cdc-134278f35e8e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 10,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "16735391-85af-478b-b54b-309c7af8fbf7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 11,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "32dca075-3ef0-4e3c-8f7a-da133170b39f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 12,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "b9d50342-b3b7-414d-8cc3-0e2b4d64e341"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 13,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "812ceb41-8abd-4b33-be0c-326c2a3efd10"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 14,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "bd6d8407-f5fd-4e25-88ab-21f7ad2859db"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 15,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "407dece5-b380-4948-a166-48337b292674"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 16,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "8b3a523b-9c66-49b7-871f-a40383343ac0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 17,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "bc7da0b3-e916-4b52-a44d-795b4ece9ad6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 18,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "98a06efe-a5d8-4c77-aeec-98b8f0f13455"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 19,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "18d86cc4-68a3-475b-ba79-538e0388146e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 20,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "73bd1ac1-9fb7-43a4-81e0-68bcbd48572b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 21,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "d4f3a1ce-424b-465c-8006-2a982edf577e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 22,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "0c8f683f-cd81-44b7-bf4b-a97fd5c4f3da"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 23,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "acff564c-f137-4b2e-8fbf-4146939bd3e1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 24,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "1ac40833-7feb-467b-9ad5-5fd85e1bf317"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 25,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "dcdfcd35-4791-4d23-903b-9cce4c446858"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 26,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "6e855f2b-e48c-4652-82ef-785e8a6841a5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 27,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "392487aa-bec7-4a6b-b655-79a34fce21f3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 28,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "59cbb1b0-3c13-4147-9031-e4f04ed84900"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 29,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "687cb820-1ca9-40cd-91aa-e41f85c71f39"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 30,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "24f15792-0f7c-40fc-b614-ba7c6b499fd1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 31,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "42fd26c3-318a-4f61-bf85-24f301e8ffc1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 32,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "187a054f-0b1b-4723-bef2-16bd20e2bd9e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 33,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "41810b27-bcae-4301-8df2-9ef092182472"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 34,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "99e6a01b-7f77-4e58-a853-8985397aa128"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 35,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "7cb57991-88bc-4db4-91e6-d936fe432b41"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 36,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "e1c50e09-9b14-4120-92e9-da0a3666a7c6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 37,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "b3cf0d14-4faa-4d6d-b8a2-a8668157f44f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 38,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "63332fda-4111-4ef9-944a-66cf692a86ba"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 39,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "6cb548c6-1119-4180-99f1-61c02d001a2b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 40,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "a752bd0b-a40f-4e73-8a5d-d602baf6a661"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 41,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "507eeba6-9824-4d69-950d-ab793430f84e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 42,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "2868d14c-4f3f-4031-88fb-0a9a0458783f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 43,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "f2f70072-bf84-432b-a161-8de430e705ee"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 44,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "3229da12-c624-4b3d-88d8-d3644bd1cf71"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 45,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "ac68d527-c45a-43f5-a7c9-24563ed8553e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 46,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "636d4a40-5d6e-44b6-a0f1-48ac0d4cd431"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 47,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "4cf1b0dc-931a-4d20-8d68-aa7ea0948f4b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 48,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "73364b87-20c1-40c9-bb97-135693eec8a1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 49,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "c2f45f0d-bc8e-4e77-9720-2a365b2f5b32"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 50,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "a6971e2c-2da4-4085-ae01-8de150865469"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 51,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "23ec8f2c-0043-47af-9a19-a6df7a16760d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 52,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "711650b0-3e2c-4bcf-81ef-c26342c849d1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 53,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "2aafd68f-b270-4286-b619-5151cf06f03d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 54,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "96903e24-0050-44ae-8926-4cc30f1fb2f8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 55,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "bc71c16f-06d9-4b16-b686-ce6cd801364b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 56,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "0a430fe7-3d74-4ed3-a58c-ca2a2cc7e147"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 57,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "e50130be-1b33-4e0b-b93c-9daccc580c31"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 58,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "012728f4-3c09-4649-98e7-115497489e4b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 59,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "3cdd5f5f-d382-44de-af4c-b1a25a17489e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 60,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "f3facdc4-c676-4fef-af02-427e1f26b00f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 61,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "e555b26f-d4bc-4100-88cb-56a043e8ba4e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 62,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "fc05ca17-7d07-4a02-9b92-4c7749d37f9b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 63,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "149a7c44-fb74-4352-baba-98e2191687c5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 64,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "c718e3c6-cc76-465d-a00d-3fca4d0530d6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 65,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "43402d1b-6067-45a9-90ea-c0a05773814a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 66,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "2d3de8be-02b3-461c-bf1c-6ccc5a506d4d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 67,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "f0da9760-b709-497c-ae97-bb6c6891afe0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 68,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "ffb69c76-fa70-4ef6-ae44-9d114e9ccb38"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 69,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "a04393af-983c-4140-bb32-b38a7e2f6b4a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 70,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "f4197efe-581a-46c8-ae82-5a5e83fb49f0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 71,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "04bbecf5-c274-4250-9093-2a68663277e8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 72,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "009ac093-f456-4269-ad20-ed8416dcb631"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 73,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "7934731c-b9c5-4949-b5f3-0396bd09f00c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 74,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "d9f3d282-6587-4534-b606-a1c48c761eb0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 75,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "a617ad69-2af6-4624-9e90-9bad0372b664"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 76,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "2d23198f-02fe-4ca3-bf61-ad926a4ba5e7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 77,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "3bd16765-c101-4619-ac6a-2a021c15cc87"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 78,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "43688aef-09b7-4d32-a80f-200533ddc1ee"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 79,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "121c3433-a7fa-4535-9f6f-5d9b7162a35f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 80,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "80b3deea-9ff3-4d7e-bc0e-bee885b9f101"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 81,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "05f3bfad-690b-4f16-8fa5-7954cb752871"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 82,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "ded0daad-7c45-474c-945d-118b9746c71d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 83,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "cf108631-5f35-47fb-93c9-c7e6697a3d09"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 84,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "e22cdb4f-3f27-47bf-b280-df33e81c1a77"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 85,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "a1b35929-a317-47b4-baaa-9b5f139110e1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 86,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "afc677b3-99bb-4d25-a0d2-99f19c2ba64b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 87,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "028057a6-9b4a-4000-a72a-1c91e5d8da23"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 88,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "6d72bf2e-b1b5-4414-bc07-6db1351ff30f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 89,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "90994a4d-6146-4f29-adc8-38b107655f9c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 90,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "cd336caf-52ec-4ef5-ac05-60f7bf3c74b0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 91,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "fcd08c1c-566e-465a-84e6-52cdd7d6c6b3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 92,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "117027d6-8de7-4a30-8524-345129f741d5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 93,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "be779c50-541b-4c21-9692-d4ffdec4e5a8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 94,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "d1179ad7-0ea0-4cce-9101-a81e694d2a85"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 95,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "20f66f74-43af-4948-a98b-2bad1e606d46"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 96,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "0927cc2c-d987-40be-bc82-f5d860fcb465"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 97,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "55b5ccbb-676f-41ac-8775-b28084f41614"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 98,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "1cf1f4d0-5637-4a0b-ab11-86d9c36ee16d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 99,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "32ff172f-7101-42f0-8ed6-79198bae9890"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 100,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "d7e26d9e-d136-4d82-9584-fe6d43fc1df8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 101,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "1ffbb50e-178d-4bbc-9fdb-d127219e9feb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 102,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "679c62b6-e006-4a9f-a222-7fb017766368"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 103,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "a2225d7c-54ea-48c2-9c6e-454524322c6f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 104,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "ed9b695d-02b8-483f-b745-491805ea2224"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 105,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "38c13419-2214-436f-b907-ca77021adcb7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 106,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "550bb1f7-b4a5-4fa2-b64d-42b4abc468ab"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 107,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "15fa13ac-36e9-4284-a642-a66ca5675fbe"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 108,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "6e6dfc4e-8e42-4f50-b8db-7722e66e87e3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 109,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "a3b28dff-4096-4620-8666-c82ae2a26901"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 110,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "76d4b0fa-6ca8-4aed-8e39-c3ba7781ab92"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 111,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "fdaaffec-526c-4142-98b6-d60ffcbf597f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 112,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "1c7cb347-dcb3-4389-9ca0-6e35f72c60bc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 113,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "12d9e0f5-698c-47f7-be76-eb045f5baf8f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 114,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "aacd0858-fccb-4c8f-8a6f-1d605346f2e5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 115,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "dc8f337c-911c-4eca-9ed8-41952f451cb1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 116,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "d9ae5b98-09ee-4b58-ae57-a0903c069201"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 117,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "65babc95-b26b-4bb0-a864-f5ea9d35fb9b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 118,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "137840fc-46a3-41cf-a6f7-b4d905c96511"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 119,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "f4e9f5ca-6116-488b-98c4-7dc677b71bed"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 120,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "1d69f093-c42a-4c95-8529-e6fc3dd1574f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 121,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "8bf5fcaa-8bcf-4def-aee8-4471b35b2e2b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 122,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "2b2c1048-226c-45e6-af47-dc0f58b6c5f4"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 123,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "6ba2bdca-1844-4600-bc36-3437fffe59e9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 124,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "63eff7b9-4b60-4bac-84bc-12863b6a62da"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 125,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "0d6941df-dd50-4bf0-9a06-6a5e84329aab"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 126,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "ac675675-b08b-4d71-8119-31456e5b032f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 127,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "83c4a1fa-1f45-40b9-8087-f83698d0aea6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 128,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "bd3e34a6-078d-46a8-954f-34be6b5c0039"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 129,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "ac2df808-a043-4d3c-9afa-84841bcea663"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 130,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "0f84e286-284a-49c1-a039-48c54a508992"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 131,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "3cef36ec-6bcb-4d49-8325-533e58d15299"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 132,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "edbe659a-2139-464d-8dfe-13e704ae9ee9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 133,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "63eff7b9-4b60-4bac-84bc-12863b6a62da"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 134,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "0d6941df-dd50-4bf0-9a06-6a5e84329aab"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 135,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "ac675675-b08b-4d71-8119-31456e5b032f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 136,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "83c4a1fa-1f45-40b9-8087-f83698d0aea6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 137,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "bd3e34a6-078d-46a8-954f-34be6b5c0039"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 138,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "ac2df808-a043-4d3c-9afa-84841bcea663"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 139,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "0f84e286-284a-49c1-a039-48c54a508992"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 140,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "3cef36ec-6bcb-4d49-8325-533e58d15299"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 141,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "edbe659a-2139-464d-8dfe-13e704ae9ee9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 142,
+      "cited_text": "Excluding human mistakes, only 7 out of 720 nodes reflect actual errors, indicating an exceptional accuracy of 99. 03%. This demonstrates remarkable reliability, particularly when compared to recent automated evaluation approaches for relatively simpler web tasks [39] , where the reported accuracy of the automated evaluation methods typically falls below 90%. We attribute this success to our tree-structured rubric design that cleanly decomposes the complex evaluation, the agentic code generation pipeline for generating judge agents, as well as the rigorous human refinement process.",
+      "start_char": 40925,
+      "end_char": 41512,
+      "chunk_id": "63eff7b9-4b60-4bac-84bc-12863b6a62da"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 143,
+      "cited_text": "Results and Analysis. The evaluator fully agrees with all 15 rubrics, offering minor suggestions on the strictness of partial scoring for two rubrics while acknowledging that the existing partial scoring remains reasonable. At the leaf-node level, we identify a total of 35 discrepancies out of 720 verifications. Upon further validation, we discover that 27 of the discrepancies arise from human evaluator errors; the original judgments are correct. This highlights the high complexity and cognitive demand involved in accurately evaluating claims within lengthy answers from agentic search, and reaffirms the reliability of our automated judge agents relative to even well-informed human evaluators. A detailed analysis of the remaining discrepancies is provided in Appendix D.5.",
+      "start_char": 40144,
+      "end_char": 40925,
+      "chunk_id": "0d6941df-dd50-4bf0-9a06-6a5e84329aab"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 144,
+      "cited_text": "To provide deeper insights into the practical values of these systems, we further include a human performance study (previously detailed in \u00a73.5) , wherein human participants undertake tasks in Subset-30 under fair settings (further elaborated in Appendix E.3).",
+      "start_char": 27990,
+      "end_char": 28250,
+      "chunk_id": "ac675675-b08b-4d71-8119-31456e5b032f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 145,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "83c4a1fa-1f45-40b9-8087-f83698d0aea6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 146,
+      "cited_text": "Comparison Between Agent Types. Unsurprisingly, ChatGPT Search and Perplexity Pro Search emerge as the weakest systems, primarily limited by their restricted search horizon and relatively",
+      "start_char": 28733,
+      "end_char": 28921,
+      "chunk_id": "bd3e34a6-078d-46a8-954f-34be6b5c0039"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 147,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "ac2df808-a043-4d3c-9afa-84841bcea663"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 148,
+      "cited_text": "humans need to visit as many as 31 websites and 375 webpages to get the answer. Note that these numbers are underestimated, as participants may make mistakes or omit steps, and are allowed to stop after one hour or if unable to find clear paths to complete the task.",
+      "start_char": 24959,
+      "end_char": 25225,
+      "chunk_id": "0f84e286-284a-49c1-a039-48c54a508992"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 149,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "3cef36ec-6bcb-4d49-8325-533e58d15299"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 150,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "edbe659a-2139-464d-8dfe-13e704ae9ee9"
+    }
+  ]
+}

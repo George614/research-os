@@ -1,0 +1,1224 @@
+{
+  "answer": "The Mind2Web 2 benchmark introduces a meticulously crafted dataset designed to evaluate agentic search systems on complex, real-world web browsing tasks. Here is the breakdown of its datasets, task distributions, and rubric statistics:\n\n**Total Task Count and Dataset Splits**\nMind2Web 2 consists of **130 realistic, long-horizon tasks** that require extensive real-time web browsing and information synthesis [1, 2]. The dataset is partitioned into:\n*   A **development set** of 10 tasks for unrestricted exploration [3].\n*   A **test set** of 120 tasks [3].\n*   A **\"Subset-30\"** consisting of 30 randomly selected tasks that were used specifically to measure the human performance baseline [3, 4]. \n\n**Time-Varying vs. Static Tasks**\nThe benchmark uniquely tests agents on their ability to retrieve real-time information:\n*   **57 tasks are explicitly time-varying**, meaning they require live web interactions to find information that frequently changes, such as relative dates, hotel availability, or fluctuating product prices [5].\n*   The remaining 73 tasks are considered time-invariant (static). \n\n**Task Categories, Domains, and Source Websites**\nWhile the tasks span diverse practical domains, the paper highlights several specific use cases and websites to demonstrate the benchmark's realism:\n*   **E-commerce and Shopping:** Tasks include navigating the **IKEA** website to find specific furniture items satisfying complex constraints, and retrieving verifiable purchase links from **Amazon** [6-8].\n*   **Travel and Booking:** Checking hotel room availability for specific, relative dates [5].\n*   **Academic and Professional Research:** Finding specific academic papers to locate the first author's email address, or navigating websites to identify specific academic fellowships [7, 8]. \n*   **News and Media:** Retrieving news articles that fit highly nuanced constraints [9].\n\n**Rubric Size Statistics**\nTo evaluate the immense complexity of these tasks, the Agent-as-a-Judge framework relies on highly detailed, tree-structured rubrics [10]. The statistics for these rubrics reflect the long-horizon nature of the benchmark:\n*   **Average Nodes per Task:** There is an average of **50 evaluation nodes** per task rubric [10].\n*   **Maximum Depth and Size:** The most complex tasks feature rubric trees with up to **6 layers** of depth and a maximum of **603 evaluation nodes** [4].",
+  "conversation_id": "80540724-b627-4699-b706-3e177c10082a",
+  "turn_number": 1,
+  "is_follow_up": true,
+  "references": [
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 1,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "8b98727e-8ba2-4980-8831-22502027b407"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 2,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "bf49c671-2f3e-48cd-822f-9548e19f3b91"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 3,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "efa1f7a9-f3e2-42c3-9bc6-7d8f7e3be108"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 4,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "9a56bf97-752d-4027-81b4-74b759584f89"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 5,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "601692de-06e3-407f-be96-9f6e0900a793"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 6,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "22f76d4e-4c3e-425f-82f1-de410c7f8d0d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 7,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "57d23d56-04f2-4ada-a9e5-2f83815ac60c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 8,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "27b8ffab-3832-4519-bb64-d2d4b1c98774"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 9,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "4cd62390-95dd-4af4-8cb2-e07343136dfe"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 10,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "7ea75285-fa55-4e8b-986f-0bf52f9810d8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 11,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "f708fb62-07a8-4dfe-8870-00194ed0255c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 12,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "50bc4fcf-e5dc-43b3-9cb3-704427f3edc0"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 13,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "2b447562-0a5c-4554-b5ac-537a52437b2e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 14,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "f1b3810f-f147-46fd-bc16-0f65c2b1bdb7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 15,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "5493a8c9-8100-4e88-8f0a-1d13d892388c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 16,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "390198fb-f5ae-400b-9ab4-38a8cc1f864c"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 17,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "c89d15a2-da01-4aac-8948-3e7378a1a470"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 18,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "797600ea-2d01-4563-bcc3-ceb750e2752b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 19,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "45c48934-b8a3-4137-bf37-a58b518578dd"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 20,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "63016cb8-b63f-465e-a981-f8766f565a73"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 21,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "bb8c66b6-b0a2-4acd-9999-42369dfe7100"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 22,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "38ea3693-a8e6-41fa-acf8-ae5423c2037c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 23,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "e2cc4d86-3aa4-4f74-8df8-d4996031a93c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 24,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "ae52164c-543f-4d5b-a057-078e9defcce9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 25,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "a0bf680c-8700-4e34-a378-7ecc4eb9d8e4"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 26,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "2c5ed9a0-7c99-430d-9d10-9c52995d9fd9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 27,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "47dabe61-2054-4baf-9e50-46044eb45a65"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 28,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "14cc4d86-232d-4a6c-b23b-667f75cf7d1b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 29,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "601d3a76-fe19-4f31-b4e8-aafcd9397b0c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 30,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "64918eaa-6715-410a-84b9-7d6dcdaf3482"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 31,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "b03e2385-8fe0-4439-b2a2-5bc6552b8b8d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 32,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "3b03161f-1059-4197-9b3e-03ea252615d6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 33,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "7bf042f6-8040-41b0-9fd8-a6a39a9f066f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 34,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "ad403bc7-2039-4641-88b1-72a23d338996"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 35,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "7472ca2b-e189-4e9e-bcf9-8913095ee032"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 36,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "f601c1e1-e0a9-4cc3-99fe-4e25ede07f5c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 37,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "8cda6b37-8a78-4a32-885a-2375bcec828e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 38,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "4524673f-ee34-4342-a357-699a05ba6e5a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 39,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "c65fb934-4493-409f-9e52-2ef77454fb6e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 40,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "4c450954-9146-45ce-ab9b-28fb3de46ca2"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 41,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "b4c6b867-e30b-44f5-a875-749ed27358a2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 42,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "a3ea3863-6b10-4458-8a29-fdac70dcec3c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 43,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "270173d1-da01-4601-87b5-97de21ae6ef7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 44,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "29e76d90-80e9-4795-b730-a7a37df1d952"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 45,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "2cb1de1f-be5d-4bbe-b76c-959c59ee1801"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 46,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "f2ddc5c0-c54b-43cf-ab51-7729e53f3ba4"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 47,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "455970d0-2ddb-4559-8fce-82c159a82f75"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 48,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "258b64a4-23b4-4bce-9df5-4160439116cc"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 49,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "4af2cbbf-520a-43d2-bbeb-864978db5b61"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 50,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "15f9215f-669b-4476-905b-bb331f72018f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 51,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "9cfbadc8-c36a-4854-8efa-e199f367b96a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 52,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "d93f067b-556b-4e2f-a2ae-cd0eeac3e2cb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 53,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "73040999-6068-4a81-82ba-8f481a924775"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 54,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "7d93bc8a-d843-42cb-a318-f773332033e5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 55,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "48212076-612e-4d67-82d3-c73cfc3c738b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 56,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "0d086935-e47a-4b7a-981f-be2a740990e7"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 57,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "ac2cb8c5-a1f6-459e-b8d4-8d003a4b3513"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 58,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "a9e13f50-0ada-4cf7-a516-496addcba4b6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 59,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "34aefc7d-da95-4f38-ba04-88aa9abf39de"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 60,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "e02c5911-6e9f-4303-bb92-7004d5234c0c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 61,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "6183cd78-0721-423f-a8e3-19491664b37d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 62,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "7123cd60-4c75-4b35-b44d-b11052a04a7d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 63,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "8a169e47-4562-4c4c-9022-57f4acbe9ae3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 64,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "b6b50070-d5f4-4ebd-95b5-f40cc3590732"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 65,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "6c68c28a-d1d7-4792-a8f9-b4e9ffc39ffc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 66,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "23c968ef-d80e-46e6-95a3-31a5f70f4ec5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 67,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "8d695a28-ac8c-4e6a-a227-ec1dd6b6519d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 68,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "252b887c-d8b2-4dc8-b147-6eb210a40e21"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 69,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "9ca2d803-5d87-4ec7-a73a-1e561d27a47d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 70,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "511d7890-3690-4321-aa17-4cddc3f98627"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 71,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "a52dc712-e787-4f80-9669-4e626488ab47"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 72,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "2a6c43ca-87f7-430a-9787-641041932fe1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 73,
+      "cited_text": "memory. For instance, in a task that requires retrieval of news articles with nuanced constraints, all the human participants exhibit various forms of oversight or carelessness regarding subtle details or overall task requirements, resulting in task failures. In contrast, most agent systems accurately interpret the task and articles and achieve better performance. Agentic search has substantial potential to augment human cognition by automating away the legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and active oversight.",
+      "start_char": 33207,
+      "end_char": 33805,
+      "chunk_id": "2614a81a-dfed-40d3-bc34-4372c0154e22"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 74,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "dca3afa7-79cb-4dc6-817f-4821787cf600"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 75,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "fbd2e5de-ffaa-4da0-ba26-f5de15d5bdcf"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 76,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "58a3e314-2562-4e03-9e80-54708cb49ac3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 77,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "e89eabee-1766-4814-8906-5f933ec36a89"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 78,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "563197e9-7fed-4ce7-9278-053724c1c9e6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 79,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "0745972f-f57f-4613-a45e-204f999e38fc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 80,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "16b3d950-e6d2-400f-816b-624f57301787"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 81,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "36aef8ce-9414-41e1-8418-4b8fc175f606"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 82,
+      "cited_text": "memory. For instance, in a task that requires retrieval of news articles with nuanced constraints, all the human participants exhibit various forms of oversight or carelessness regarding subtle details or overall task requirements, resulting in task failures. In contrast, most agent systems accurately interpret the task and articles and achieve better performance. Agentic search has substantial potential to augment human cognition by automating away the legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and active oversight.",
+      "start_char": 33207,
+      "end_char": 33805,
+      "chunk_id": "1cbd3a00-7b75-425f-941b-2b17a2e2a5f4"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 83,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "d6c6cd27-40cf-46e1-ab49-8fc8a5803c96"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 84,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "c6ecd6a7-471b-4691-943e-4b2710a5708c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 85,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "e982ffef-11b2-4e4a-9fc4-ac300feb9d85"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 86,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "e651d851-0c93-44c5-8eaa-226a0942546c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 87,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "f04395b0-e953-44e3-9654-d18526a88c18"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 88,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "94a2501a-2aad-4f12-ae00-af6bae3eeeb7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 89,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "2c2bf185-d458-4088-acf9-ea7eee5ef679"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 90,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "29c600a0-09a6-4c89-bfea-217750d6a96c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 91,
+      "cited_text": "memory. For instance, in a task that requires retrieval of news articles with nuanced constraints, all the human participants exhibit various forms of oversight or carelessness regarding subtle details or overall task requirements, resulting in task failures. In contrast, most agent systems accurately interpret the task and articles and achieve better performance. Agentic search has substantial potential to augment human cognition by automating away the legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and active oversight.",
+      "start_char": 33207,
+      "end_char": 33805,
+      "chunk_id": "0bc39623-9a0e-4925-a8e2-0524d069380d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 92,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "6d8b6350-69b7-4a7b-8c41-d262a742e277"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 93,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "7765e774-c0f1-4685-941a-043558de99ed"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 94,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "b24789cc-5fec-421a-9519-81c9a4942ee8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 95,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "b271ae0d-cc56-4ed7-a4b9-1bfa3aefd55d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 96,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "ce4c5dd9-72dd-4c62-a44d-b4180fab74a3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 97,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "93ef1f2a-78d5-49c3-b64c-14b72d5940f7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 98,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "6e3b89e2-8564-4815-a6f6-7187f1844209"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 99,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "c3819d13-b3a3-41a0-94c3-b97466eb79ff"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 100,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "0a586c06-d888-4f52-8343-fe4e0b74d71b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 101,
+      "cited_text": "memory. For instance, in a task that requires retrieval of news articles with nuanced constraints, all the human participants exhibit various forms of oversight or carelessness regarding subtle details or overall task requirements, resulting in task failures. In contrast, most agent systems accurately interpret the task and articles and achieve better performance. Agentic search has substantial potential to augment human cognition by automating away the legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and active oversight.",
+      "start_char": 33207,
+      "end_char": 33805,
+      "chunk_id": "ff6efc7c-3f3c-40eb-8bbe-9e7b456611d1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 102,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "1b247cd6-629c-4695-bd25-a1b6805a195b"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 103,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "81e14e82-74d0-42c5-b1b0-f0b2ed23d0d8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 104,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "f8201c51-f75f-466d-92d9-6b77e8e84e44"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 105,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "b4eb96f9-9980-46b8-86ec-73f1794a95b5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 106,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "5fa9bdcd-11ea-4c05-8c24-ef37c9c6b229"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 107,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "16bf262c-7007-4c4a-8497-1043aa746343"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 108,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "596fec53-4cc9-45e9-9970-1dcca51d9202"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 109,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "489c3a79-c0b7-4fc6-b7d1-91c30eff1a1c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 110,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "252fcb0f-c945-4d96-a13c-ca569a484102"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 111,
+      "cited_text": "memory. For instance, in a task that requires retrieval of news articles with nuanced constraints, all the human participants exhibit various forms of oversight or carelessness regarding subtle details or overall task requirements, resulting in task failures. In contrast, most agent systems accurately interpret the task and articles and achieve better performance. Agentic search has substantial potential to augment human cognition by automating away the legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and active oversight.",
+      "start_char": 33207,
+      "end_char": 33805,
+      "chunk_id": "51b0d951-2a98-4205-b8c8-938109af0be5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 112,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "53f01b6e-0778-43ec-b0ac-3b4585e3abd0"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 113,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "1fc0e1ba-528e-4daa-860d-1d1c266875ba"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 114,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "e5ce1a02-e1d7-423e-8e49-ad5b111a743e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 115,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "adc0d460-3f15-45b8-b2e5-40fcd6000067"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 116,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "3e45101a-eb44-4f49-b055-b8e13ce6c012"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 117,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "e2e65a2b-ef6f-44d8-a114-f8f6a8891faf"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 118,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "2ebe8f5c-3559-4185-bd72-ca001a500794"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 119,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "3ecca96c-2250-40f0-812c-8ca606a429c4"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 120,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "48ad6477-258b-4aeb-80c0-33f3ac3c3811"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 121,
+      "cited_text": "memory. For instance, in a task that requires retrieval of news articles with nuanced constraints, all the human participants exhibit various forms of oversight or carelessness regarding subtle details or overall task requirements, resulting in task failures. In contrast, most agent systems accurately interpret the task and articles and achieve better performance. Agentic search has substantial potential to augment human cognition by automating away the legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and active oversight.",
+      "start_char": 33207,
+      "end_char": 33805,
+      "chunk_id": "329bccd7-50e5-4d10-8a83-4f12074dd09e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 122,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "5a49b7fb-f3f3-4a17-81f6-6eec5edf1a93"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 123,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "82c81b5f-93d4-4456-b6cc-c6f9710676b6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 124,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "ccfa84a4-2fa9-4aef-a089-fc8f1b924242"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 125,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "df7e210d-734a-4974-a900-e1ce981da5e8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 126,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "8c937a50-688e-48ba-988f-e144235fbefb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 127,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "6f5e8ff3-5c94-4e1f-9f6a-9cc0d74427ae"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 128,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "22ded58d-009e-417c-9241-9c772c978f07"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 129,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "50c111d7-79a9-4c95-bcd8-25d0b51d583e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 130,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "39f75991-b43b-4856-9e03-a3b0db31781a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 131,
+      "cited_text": "memory. For instance, in a task that requires retrieval of news articles with nuanced constraints, all the human participants exhibit various forms of oversight or carelessness regarding subtle details or overall task requirements, resulting in task failures. In contrast, most agent systems accurately interpret the task and articles and achieve better performance. Agentic search has substantial potential to augment human cognition by automating away the legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and active oversight.",
+      "start_char": 33207,
+      "end_char": 33805,
+      "chunk_id": "656d5fab-09de-4b5b-80eb-44809db0784d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 132,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "143730d8-f574-4ba9-af8e-2dd6dc4fc7d7"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 133,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "82c81b5f-93d4-4456-b6cc-c6f9710676b6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 134,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "ccfa84a4-2fa9-4aef-a089-fc8f1b924242"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 135,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "df7e210d-734a-4974-a900-e1ce981da5e8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 136,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "8c937a50-688e-48ba-988f-e144235fbefb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 137,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "6f5e8ff3-5c94-4e1f-9f6a-9cc0d74427ae"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 138,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "22ded58d-009e-417c-9241-9c772c978f07"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 139,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "50c111d7-79a9-4c95-bcd8-25d0b51d583e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 140,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "39f75991-b43b-4856-9e03-a3b0db31781a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 141,
+      "cited_text": "memory. For instance, in a task that requires retrieval of news articles with nuanced constraints, all the human participants exhibit various forms of oversight or carelessness regarding subtle details or overall task requirements, resulting in task failures. In contrast, most agent systems accurately interpret the task and articles and achieve better performance. Agentic search has substantial potential to augment human cognition by automating away the legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and active oversight.",
+      "start_char": 33207,
+      "end_char": 33805,
+      "chunk_id": "656d5fab-09de-4b5b-80eb-44809db0784d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 142,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "143730d8-f574-4ba9-af8e-2dd6dc4fc7d7"
+    },
+    {
+      "source_id": "d0732f20-a26f-45f6-8145-11bd6aeb6c2b",
+      "citation_number": 143,
+      "cited_text": "Daily Papers - Hugging Face",
+      "start_char": 0,
+      "end_char": 27,
+      "chunk_id": "82c81b5f-93d4-4456-b6cc-c6f9710676b6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 144,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "ccfa84a4-2fa9-4aef-a089-fc8f1b924242"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 145,
+      "cited_text": "We split our benchmark into a development set (10 tasks), and a test set (120 tasks), and release all the tasks and evaluation scripts. We will maintain a leaderboard for the test set.",
+      "start_char": 25689,
+      "end_char": 25873,
+      "chunk_id": "df7e210d-734a-4974-a900-e1ce981da5e8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 146,
+      "cited_text": "3.5 Benchmark Statistics",
+      "start_char": 23888,
+      "end_char": 23912,
+      "chunk_id": "8c937a50-688e-48ba-988f-e144235fbefb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 147,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "6f5e8ff3-5c94-4e1f-9f6a-9cc0d74427ae"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 148,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "22ded58d-009e-417c-9241-9c772c978f07"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 149,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "50c111d7-79a9-4c95-bcd8-25d0b51d583e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 150,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "39f75991-b43b-4856-9e03-a3b0db31781a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 151,
+      "cited_text": "memory. For instance, in a task that requires retrieval of news articles with nuanced constraints, all the human participants exhibit various forms of oversight or carelessness regarding subtle details or overall task requirements, resulting in task failures. In contrast, most agent systems accurately interpret the task and articles and achieve better performance. Agentic search has substantial potential to augment human cognition by automating away the legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and active oversight.",
+      "start_char": 33207,
+      "end_char": 33805,
+      "chunk_id": "656d5fab-09de-4b5b-80eb-44809db0784d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 152,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "143730d8-f574-4ba9-af8e-2dd6dc4fc7d7"
+    }
+  ]
+}

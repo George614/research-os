@@ -1,0 +1,135 @@
+{
+  "name": "Agentic Reinforcement Learning and Reward Modeling",
+  "children": [
+    {
+      "name": "Implicit Step Rewards (iStar)",
+      "children": [
+        {
+          "name": "Temporal Credit Assignment"
+        },
+        {
+          "name": "Multi-Turn DPO Objective"
+        },
+        {
+          "name": "Potential-Based Shaping Rewards"
+        },
+        {
+          "name": "Alternating Optimization Scheme"
+        }
+      ]
+    },
+    {
+      "name": "Self-Play Architectures",
+      "children": [
+        {
+          "name": "SPELL Framework",
+          "children": [
+            {
+              "name": "Multi-Role: Questioner, Responder, Verifier"
+            },
+            {
+              "name": "Semantic Equivalence Mechanism"
+            },
+            {
+              "name": "Gaussian-Shaped Reward"
+            }
+          ]
+        },
+        {
+          "name": "SPICE/SPARK",
+          "children": [
+            {
+              "name": "Information Asymmetry"
+            },
+            {
+              "name": "Corpus-Grounded Reasoning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Counterfactual Self-Questioning (CSQ)",
+      "children": [
+        {
+          "name": "Internal Ego-Critique"
+        },
+        {
+          "name": "Targeted Failure Probes"
+        },
+        {
+          "name": "Error Localization"
+        },
+        {
+          "name": "GRPO Integration"
+        }
+      ]
+    },
+    {
+      "name": "Advanced Evaluation Frameworks",
+      "children": [
+        {
+          "name": "Agent-as-a-Judge",
+          "children": [
+            {
+              "name": "Tree-Structured Rubrics"
+            },
+            {
+              "name": "Critical vs Non-Critical Nodes"
+            },
+            {
+              "name": "Tool-Augmented Verification"
+            }
+          ]
+        },
+        {
+          "name": "Humanline Alignment",
+          "children": [
+            {
+              "name": "Prospect Theory Optimization"
+            },
+            {
+              "name": "Humanline Syncing"
+            },
+            {
+              "name": "Perceptual Bias Clipping"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Challenges and Mitigation",
+      "children": [
+        {
+          "name": "Reward Hacking",
+          "children": [
+            {
+              "name": "Energy Loss Phenomenon"
+            },
+            {
+              "name": "Adversarial Reasoning Exploitation"
+            },
+            {
+              "name": "Over-refusal Bias"
+            }
+          ]
+        },
+        {
+          "name": "Optimization Stability",
+          "children": [
+            {
+              "name": "Group Relative Policy Optimization (GRPO)"
+            },
+            {
+              "name": "Relative Ranking (ArenaRL)"
+            },
+            {
+              "name": "Step-level Advantage Estimation"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

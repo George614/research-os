@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+
+# Obsidian — exclude regenerated plugin binaries and per-user local state.
+# manifest.json files are kept so the repo documents which plugins are required.
+obsidian-vault/.obsidian/plugins/*/main.js
+obsidian-vault/.obsidian/plugins/*/styles.css
+obsidian-vault/.obsidian/plugins/*/data.json
+obsidian-vault/.obsidian/workspace.json
+obsidian-vault/.obsidian/workspace-mobile.json
+obsidian-vault/.obsidian/workspaces.json
+
+# Python / Jupyter (future scripts)
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Env / secrets
+.env
+.env.local
+*.secret
+
+# Editor scratch
+.vscode/
+.idea/
+
+# Misc
+*.tmp
+*.log

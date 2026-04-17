@@ -1,0 +1,720 @@
+{
+  "answer": "The central thesis of Mind2Web 2 is that the rapid advancement and open-ended complexity of agentic search systems have completely outpaced traditional evaluation methodologies, which rely on short search horizons and static answers, thereby necessitating a new evaluation paradigm for long-horizon, time-varying web tasks [1, 2]. \n\nThe paper makes the following key contributions:\n*   **The Mind2Web 2 Benchmark:** The authors introduce a comprehensive dataset of **130 realistic, long-horizon tasks** that require real-time web browsing and extensive information synthesis, constructed using over 1,000 hours of expert human labor [3, 4].\n*   **The Agent-as-a-Judge Evaluation Paradigm:** A novel automated evaluation framework that leverages **generation-verification asymmetry** to reliably assess lengthy, complex, and time-varying answers that are beyond the capabilities of conventional LLM-as-a-Judge methods [5].\n*   **Tree-Structured Rubrics:** A headline technical innovation where task goals are decomposed into a hierarchical tree of **critical, non-critical, and sequential nodes** to automatically assess both the correctness of the answer and its source attribution [5-7].\n*   **Comprehensive Systems Evaluation:** An extensive analysis evaluating **ten frontier agentic search systems against human performance**, revealing that top systems like OpenAI Deep Research can already achieve **50\u201370% of human performance in half the time**, while also exposing systemic struggles with time-varying tasks that require live web interaction [8, 9].",
+  "conversation_id": "80540724-b627-4699-b706-3e177c10082a",
+  "turn_number": 1,
+  "is_follow_up": true,
+  "references": [
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 1,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "53b2f048-386f-471c-b14a-28291ab37386"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 2,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "c158b0e1-324e-4083-8167-e80000a26f46"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 3,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "5a11884b-be65-40ac-93ed-a6d2ad572cb3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 4,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "bd980113-17be-4df5-8866-d747a8ce2401"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 5,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "74436a24-62f9-4f9a-85a8-67f66ea92940"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 6,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "b2eeb4d0-7504-4a04-a3a8-bb810506de5e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 7,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "b4278d05-a582-4ba1-baa6-c29fddc02062"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 8,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "25f93a5d-d4b1-4758-bd6b-950a6207ac44"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 9,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "640df9a6-21c8-4990-88a7-94d1ae71e682"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 10,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "6614586a-682d-414e-bedb-10526a67f36e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 11,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "05dd0ae9-5053-4063-8c4a-5bf313a3e42e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 12,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "8884e72c-6cc6-49a2-b7c2-60df6c6bb3ee"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 13,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "8424af04-ca3a-48e1-959b-5e0fd25700ee"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 14,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "a6daec04-0122-4088-ae8d-8e66e60c207e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 15,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "1d6607a8-c297-4b4c-b43f-91232ef63068"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 16,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "1f5f52c6-a083-4fa9-824e-781af02534e2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 17,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "40c8df8d-6a85-4725-9fd9-2541bd3b3282"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 18,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "7af65bd9-2079-41d2-b99a-2ac6e2183a82"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 19,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "de92c1aa-907c-4102-b654-315e03a5b14d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 20,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "ebb637b6-46b9-49e9-9337-3189bd4165eb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 21,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "44701b8e-cb51-4497-b843-b77d6305e767"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 22,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "6027ce30-39fc-4f79-818a-7119598a7530"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 23,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "7dff09d3-27b3-4c61-97a2-3a4e24ac8fdd"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 24,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "e13fc1f1-4f8b-4ae4-95d4-bfd0fc0708b6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 25,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "344369fa-785a-41c1-ab0f-dbfed416951b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 26,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "3e112cf2-7f14-434d-ae47-fad5c0da3b08"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 27,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "6a294a7a-f38d-41af-906c-9ea5f6a3ad11"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 28,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "7972dc9e-e061-4763-81c7-9a122a2d52f3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 29,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "77398434-1453-4c2c-9b4d-e90315697d62"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 30,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "868ad6d9-2605-4796-93c5-5748c78ed171"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 31,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "3da92125-377f-4b73-a57c-e0d23e866228"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 32,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "56f8de43-f079-40d3-b2ee-71e48a0972f7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 33,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "27e146c8-00e8-40e8-a631-d317b99c627e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 34,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "9108f393-52c3-47fb-a523-ed5bd3e46c43"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 35,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "20aff24a-1e91-4cd3-b9aa-6809f0cea719"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 36,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "31235d6a-80e2-41f4-b4a3-8e2383ea8db7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 37,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "364539f4-6e0e-472c-b8dc-708524fc2982"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 38,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "0845451c-5386-48cb-b43c-b14c2aaf7eee"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 39,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "8a5040e5-3cc1-40d7-871f-ea9a4573c1b9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 40,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "a97ab9df-0060-496f-af58-15b5eb0ab27f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 41,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "0490346a-74c0-403c-a6d5-4a385f700634"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 42,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "48b9478c-6f47-4e72-9cc2-5bb3213e860a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 43,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "e598e11b-b725-416a-ae95-42260e70af10"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 44,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "71785f66-d08c-4048-993c-bfec05b9c91b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 45,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "b5420303-116e-4b99-8b97-9a06f461660e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 46,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "bb5f423b-b96d-4d8d-a2d2-6005abb064b4"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 47,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "512bdf82-a0b1-4d4a-a289-5f350d228f58"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 48,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "dbb1d5bc-e86f-4704-bef6-23cb2b6528a8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 49,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "3ff203ce-b12c-4908-bc32-c562d2bf0647"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 50,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "f0fba147-f739-4034-919f-e6a6f8c5db24"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 51,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "40b38570-f6b4-4f16-81bb-c396e294fa2d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 52,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "c74b7e29-5e60-44d2-b347-42aad4b82aef"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 53,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "4ac58dd4-72bd-4765-9a8d-4647463bbe5e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 54,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "8ab1050c-b491-469d-a700-e172cf5eee1e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 55,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "72eca886-d1fb-4d79-a835-9d0b5376042d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 56,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "8694d760-55fb-4b0b-b575-39f9c774f9cb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 57,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "6fc02ad3-c13f-42c6-827f-eedb01380aa4"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 58,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "5ba664b3-d3ba-4c73-9262-0a55a1f8db01"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 59,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "20638c8b-6c4e-40df-965b-7b75f0c4afdb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 60,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "6a07a8f2-f049-4fdc-89e3-299b7ae83a27"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 61,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "429b990e-8254-4784-9e59-731e0dae6c7b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 62,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "c643c4f5-8d96-4b33-ba2a-74d2e9eaa24c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 63,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "25bfa098-cb2e-4671-a933-557385eb628f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 64,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "e0d1f3fe-dd9e-48aa-ba72-70dd22d7e9e8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 65,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "13b63cff-fd9e-479d-836b-fadf1dea1bfc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 66,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "7a109e2b-0ca2-4485-bd7e-59511fd7aecb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 67,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "59e3f706-efd0-4965-8a60-6c130cb0de2b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 68,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "f4f0b6a1-0389-4ef9-90cc-18426e3f2561"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 69,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "94a72c6e-b26b-40d0-8d1f-81c9609c9e28"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 70,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "0bb790de-85eb-48f5-833f-dedb3287c804"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 71,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "2f4dcee1-2abd-4ba4-8d7b-5c8fe016102a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 72,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "25bfa098-cb2e-4671-a933-557385eb628f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 73,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "e0d1f3fe-dd9e-48aa-ba72-70dd22d7e9e8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 74,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "13b63cff-fd9e-479d-836b-fadf1dea1bfc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 75,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "7a109e2b-0ca2-4485-bd7e-59511fd7aecb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 76,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "59e3f706-efd0-4965-8a60-6c130cb0de2b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 77,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "f4f0b6a1-0389-4ef9-90cc-18426e3f2561"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 78,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "94a72c6e-b26b-40d0-8d1f-81c9609c9e28"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 79,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "0bb790de-85eb-48f5-833f-dedb3287c804"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 80,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "2f4dcee1-2abd-4ba4-8d7b-5c8fe016102a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 81,
+      "cited_text": "Show more",
+      "start_char": 2741,
+      "end_char": 2750,
+      "chunk_id": "25bfa098-cb2e-4671-a933-557385eb628f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 82,
+      "cited_text": "Existing benchmarks and evaluation methodologies struggle to keep up with the growing complexity of agentic search. Many benchmarks have been proposed for autonomous web agents [ 8 , 21 , 39 , 40 , 46 ] but they primarily focus on tasks of a moderate horizon (e.g., up to 10 actions) that can be completed on a single website. Several benchmarks cover cross-website search tasks [ 23 , 34 , 41 ], including most recently BrowseComp [ 36 ] from OpenAI. However, to facilitate automated evaluation, a common compromise was made: they focus on tasks with predefined, time-invariant answers, oftentimes just a single answer string. While these benchmarks still provide valuable signals for evaluating certain aspects of agentic search systems, they are far from the full spectrum of tasks that current and future systems are facing. Consider an everyday task already within reach of current Deep Research systems, shown in Figure 1. It does not have a predefined answer but requires interacting with live websites to get real-time information. A corresponding agent trajectory may span dozens to hundreds of actions on the IKEA website, let alone more complex tasks that span many websites. We need new evaluation methodologies and benchmarks for such long-horizon, time-varying tasks.",
+      "start_char": 7235,
+      "end_char": 8507,
+      "chunk_id": "e0d1f3fe-dd9e-48aa-ba72-70dd22d7e9e8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 83,
+      "cited_text": "Agentic search such as Deep Research systems-where agents autonomously browse the web, synthesize information, and return comprehensive citation-backed answers-represents a major shift in how users interact with web-scale information. While promising greater efficiency and cognitive offloading, the growing complexity and open-endedness of agentic search have outpaced existing evaluation benchmarks and methodologies, which largely assume short search horizons and static answers. In this paper, we introduce Mind2Web 2, a benchmark of 130 realistic, high-quality, and long-horizon tasks that require real-time web browsing and extensive information synthesis, constructed with over 1000 hours of human labor. To address the challenge of evaluating time-varying and complex answers, we propose a novel Agent-as-a-Judge framework. Our method constructs task-specific judge agents based on a tree-structured rubric design to automatically assess both answer correctness and source attribution. We conduct a comprehensive evaluation of ten frontier agentic search systems and human performance, along with a detailed error analysis to draw insights for future development. The best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time, highlighting its great potential. Altogether, Mind2Web 2 provides a rigorous foundation for developing and benchmarking the next generation of agentic search systems.",
+      "start_char": 1275,
+      "end_char": 2741,
+      "chunk_id": "13b63cff-fd9e-479d-836b-fadf1dea1bfc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 84,
+      "cited_text": "In response to these challenges, we propose Mind2Web 2, a new benchmark designed to rigorously evaluate agentic search systems on realistic and long-horizon tasks involving real-time web search and browsing. It consists of 130 high-quality tasks across diverse practical domains. Each task has undergone multiple stages and hours of expert labor for polishing and validation to ensure its realism, complexity, and verifiability. Approximately, at least 1, 000 hours of human labor are spent to construct the benchmark, including the tasks and their evaluation scripts.",
+      "start_char": 8507,
+      "end_char": 9075,
+      "chunk_id": "7a109e2b-0ca2-4485-bd7e-59511fd7aecb"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 85,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "59e3f706-efd0-4965-8a60-6c130cb0de2b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 86,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "f4f0b6a1-0389-4ef9-90cc-18426e3f2561"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 87,
+      "cited_text": "Figure 2: Example of tree-structured rubrics. Top-down, task goals are decomposed into a tree structure; bottom-up, binary scores from leaf nodes are aggregated into the overall task score. The leaf nodes are verification of low-level criteria, implemented by various functions of judge agents (e.g., simple_verify: verify a simple factual or logical statement; verify_by_url: verify whether a statement in the answer is backed by a cited webpage). See more discussion in \u00a73.3 and \u00a73.4.",
+      "start_char": 19165,
+      "end_char": 19651,
+      "chunk_id": "94a72c6e-b26b-40d0-8d1f-81c9609c9e28"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 88,
+      "cited_text": "We evaluate ten frontier agentic search systems on Mind2Web 2 and also compare them with human performance. Overall, the results show a clear advantage of Deep Research systems over search-augmented LLMs and web agents like Operator, owing to their ability to effectively leverage advanced tools and stay focused over a long horizon. Our results also reveal that current systems still struggle with time-varying tasks that require real-time information and highlight the need for agentic search systems to integrate the ability to interact with live websites. Finally, even though current systems still underperform humans, the best-performing system, OpenAI Deep Research, can already achieve 50-70% of human performance while spending half the time. It also outperforms humans on some tasks requiring great attention to detail and exhaustiveness in the search. After all, humans are subject to cognitive fatigue and a limited working memory. Agentic search presents a substantial potential in augmenting human cognition by automating legwork and allowing us to focus our limited cognitive capacity on things that matter more, such as critical decisions and oversight.",
+      "start_char": 10916,
+      "end_char": 12085,
+      "chunk_id": "0bb790de-85eb-48f5-833f-dedb3287c804"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 89,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "2f4dcee1-2abd-4ba4-8d7b-5c8fe016102a"
+    }
+  ]
+}

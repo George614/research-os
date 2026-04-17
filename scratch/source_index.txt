@@ -1,0 +1,43 @@
+Total sources: 41
+
+[ 1] d59bae41  (PDF) Agent-as-a-Judge - ResearchGate
+[ 2] a9c54687  A Survey of Process Reward Models: From Outcome Signals ... - arXiv
+[ 3] 13672601  AGENTIC REINFORCEMENT LEARNING WITH IM- PLICIT STEP REWARDS - OpenReview
+[ 4] ea7db974  Agent-as-a-Judge: Evaluate Agents with Agents - ICML 2026
+[ 5] c09d875d  Agent-as-a-Judge: Evaluate Agents with Agents - OpenReview
+[ 6] 541199ab  Agentic Benchmarks - Emergent Mind
+[ 7] 1b88a066  Agentic Reinforcement Learning with Implicit Step Rewards - OpenReview
+[ 8] 70ed2e81  Agentic Reinforcement Learning with Implicit Step Rewards - alphaXiv
+[ 9] a2acc082  Agentic Reinforcement Learning with Implicit Step Rewards - arXiv
+[10] 240a2c81  Counterfactual Self-Questioning for Stable Policy Optimization in Language 
+[11] ad940940  Counterfactual Self-Questioning for Stable Policy Optimization in Language 
+[12] 1c03530c  Daily Papers - Hugging Face
+[13] 6f4dfb21  Daily Papers - Hugging Face
+[14] a8fdda70  Daily Papers - Hugging Face
+[15] ab0f8cd6  Daily Papers - Hugging Face
+[16] ab903053  Daily Papers - Hugging Face
+[17] d0732f20  Daily Papers - Hugging Face
+[18] e870601d  Daily Papers - Hugging Face
+[19] 431b42f6  Examining Reasoning LLMs-as-Judges in Non-Verifiable LLM Post-Training - ar
+[20] b1fa51e8  Examining Reasoning LLMs-as-Judges in Non-Verifiable LLM Post-Training | al
+[21] f3c21fa1  From Generation to Judgment: Opportunities and Challenges of LLM-as-a-judge
+[22] 2e0ce2c8  Humanline: Online Alignment as Perceptual Loss - arXiv
+[23] b5196248  Mending the Holes: Mitigating Reward Hacking in Reinforcement Learning for 
+[24] 3a2b34ef  Meta-Rewarding Language Models: Self-Improving Alignment with ...
+[25] 9ce6646d  Mind2Web 2: Evaluating Agentic Search with Agent-as-a-Judge - OpenReview
+[26] b8c30523  Mind2Web 2: Evaluating Agentic Search with Agent-as-a-Judge | OpenReview
+[27] 139f2e67  NeurIPS Poster Mind2Web 2: Evaluating Agentic Search with Agent-as-a-Judge
+[28] d888c625  Online Process Reward Leanring for Agentic Reinforcement Learning - Researc
+[29] e524dfaf  Online Process Reward Leanring for Agentic Reinforcement Learning - arXiv
+[30] ddc65186  Paper page - Examining Reasoning LLMs-as-Judges in Non-Verifiable LLM Post-
+[31] a91756f3  Related papers: Information Gain-based Policy Optimization: A Simple and Ef
+[32] 175fa536  SPELL: Self-Play Reinforcement Learning for Evolving Long-Context Language 
+[33] 52c2e780  SPELL: Self-Play Reinforcement Learning for Evolving Long-Context Language 
+[34] 9c5146fd  SPELL: Self-Play Reinforcement Learning for Evolving Long-Context Language 
+[35] 3ca39b02  SPELL: Self-Play Reinforcement Learning for evolving Long-Context Language 
+[36] 97d443ce  SPELL: Self-Play Reinforcement Learning for evolving Long-Context Language 
+[37] 562ac81f  SPICE : Self-Play In Corpus Environments Improves Reasoning - arXiv
+[38] 645788d0  SPICE: Self-Play In Corpus Environments Improves Reasoning - arXiv
+[39] 176e7460  Strategic Paradigms in Reward Modeling for Agentic Reinforcement Learning: 
+[40] 5fbebc54  The Energy Loss Phenomenon in RLHF: A New Perspective on Mitigating Reward 
+[41] 0141b01c  [2601.05111] Agent-as-a-Judge - arXiv

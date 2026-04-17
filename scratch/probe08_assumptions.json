@@ -1,0 +1,1104 @@
+{
+  "answer": "**Mind2Web 2's methodology** explicitly rests on the assumption of **generation-verification asymmetry**, which posits that while generating a comprehensive, long-horizon answer across multiple websites is highly complex and variable, verifying that answer against predefined task requirements is tractable and can be automated [1]. Beyond this, the framework relies on several specific assumptions regarding rubrics, tools, and the nature of the tasks:\n\n*   **(a) Rubric completeness:** The methodology assumes that complex, real-world tasks can be systematically decomposed into a hierarchical tree of binary, verifiable criteria [1, 2]. By equating the successful passing of these predefined leaf nodes to overall task success, it implicitly assumes that the task-specific rubric comprehensively captures the entirety of the user's intent and all necessary constraints [1]. \n*   **(b) LLM tool-use reliability:** The automated judge agents rely heavily on LLM-based tools, specifically an **Extractor** to pull structured claims from lengthy text and a **Verifier** to check those claims [3]. The methodology assumes these sub-agents can consistently and reliably parse unstructured text, follow complex instructions, and compare claims against evidence without hallucinating or making systematic reasoning errors [3, 4]. \n*   **(c) Website stability during evaluation:** Because the benchmark tests agents on **time-varying tasks** (such as retrieving fluctuating product prices or live hotel availability), evaluating these tasks assumes that the evidence (such as screenshots or source text) captured by the agent accurately reflects the state of the website at the exact time of the query [4-6]. The judge Verifier relies on examining these captured screenshots alongside the extracted text to determine truthfulness, assuming this captured state provides a stable, reliable snapshot for evaluation even if the live website changes [4].\n*   **(d) Source-document availability:** A core pillar of the evaluation is assessing \"attribution,\" which assumes that agents are capable of providing valid source citations and that these source documents (e.g., URLs and their contents) are available for the judge to access and cross-reference [1, 3]. The framework assumes that if an agent fabricates a URL, provides a dead link, or fails to cite a source, it can be objectively penalized as an \"invalid attribution\" or \"missing attribution\" error [7, 8].\n*   **(e) Scope of evaluation:** The framework explicitly assumes that it is evaluating tasks that are **\"objective and verifiable\"** [5]. It relies on the premise that task goals have clearly defined criteria that can be checked by comparing answer text against cited source webpages [5]. Consequently, it assumes the Agent-as-a-Judge methodology is best suited for factual, information-gathering tasks and cannot reliably evaluate unverifiable, subjective, or purely open-ended tasks (like creative writing or social intelligence interactions) where binary correctness cannot be objectively established [5, 9].",
+  "conversation_id": "80540724-b627-4699-b706-3e177c10082a",
+  "turn_number": 1,
+  "is_follow_up": true,
+  "references": [
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 1,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "775ea437-cebd-47ce-b530-d12ec30db00b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 2,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "d15d18e3-2bd7-40e9-b259-915b0e5fc02a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 3,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "5923c1c4-a572-4b2d-a4aa-a09206d6fb47"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 4,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "a5ede725-ecfa-45c3-a296-86da7d0dfa5e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 5,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "872faf78-5300-4a8e-b0c2-5c10bf623332"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 6,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "c9d39580-7da7-48a6-a94d-8ae711b59d46"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 7,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "c6f4d425-4768-446f-8ee6-940257386ebe"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 8,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "b67103e5-3e3a-44c3-b5e1-951cff596a64"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 9,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "847b0660-1645-4e55-9754-6078beacd6bc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 10,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "43304971-23df-4fc6-9e2d-06bc904c7d1f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 11,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "38f22392-0908-4cc3-85a1-c3fe0360f3b7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 12,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "56736a7e-77b9-4f44-bcf1-71905e39dcc2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 13,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "66135464-75c2-44aa-8b1a-e022679be4bc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 14,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "63087adb-8e35-49ff-9cab-3e73baa6bf92"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 15,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "0f25a674-d926-4f22-99e5-7e8ed3377df2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 16,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "126d3637-2662-4322-9318-a976be7cec21"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 17,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "310fa47a-031f-4d40-b151-23af659a5118"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 18,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "19f5f102-2cb7-43df-a6a4-02ce74ad6a4f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 19,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "56670960-f394-4579-b723-aacfe3a5c52e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 20,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "ce81cdb7-385b-40cf-9eae-8a600d1468c2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 21,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "e8121788-bf8b-4bb4-a42b-ef923a64efbe"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 22,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "89452b72-4036-44f7-8aa3-f1615afad85a"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 23,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "bd817e2a-5166-4954-9852-2ca6f4c4b810"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 24,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "14f1dc39-7678-4140-831d-19c59c767701"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 25,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "675da59a-832d-4b42-8f66-c91213c6b209"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 26,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "115d899c-222e-42be-95dd-ddad7fdad6d7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 27,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "9a6febb3-d634-4d13-97e6-423e8cadca40"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 28,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "da52524a-85f7-4430-b325-061084960fbc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 29,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "865df22b-0ce4-40c0-b26a-625d8ee65085"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 30,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "ed009f7c-821f-4c93-971f-334b9e837bb3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 31,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "c9b2a372-6347-4555-aa4d-4a38d3233c3e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 32,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "38fb3af3-2b1a-4d1b-8b6c-2a4248d662a5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 33,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "61352f66-565b-4d48-8b56-6bbea4be7395"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 34,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "61aa5140-1358-40a3-86cb-8705a59482b3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 35,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "ecd6d9f6-e45f-4108-b5e2-010d1841c2cf"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 36,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "b076b5a4-5f0e-41b1-ba46-41ae6ae6d51d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 37,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "d8c7796f-57d9-4a1a-aa85-5577f06797c6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 38,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "6b322d4c-8343-4dda-9a97-8121feaa2227"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 39,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "d4d69db0-ba84-4f14-a012-101e9986315e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 40,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "064425b8-ad65-44d8-b6e3-40186d389b98"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 41,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "a4f72679-bd50-46b9-984b-8c8a3e7888a5"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 42,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "0c403122-b390-415f-8b87-e19af30a001f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 43,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "b4cee600-0275-4c29-bbeb-40ce8ec6a114"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 44,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "e2ff6c3e-ecc3-46f4-bb0c-f39284ef5a99"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 45,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "ffe6edba-0b9f-41fd-9951-fb72c177b008"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 46,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "aee673c1-11b4-4703-9c10-faa5f880c3b2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 47,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "62f5aea5-89e8-4602-85d7-5e1cea860218"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 48,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "398e4b82-1dc9-4216-90bf-bfbe2ada7a88"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 49,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "fbd29a62-99d0-45ee-a0e2-b987f69801df"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 50,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "ba72abda-0c77-4c41-bce3-d62e04e66524"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 51,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "05c99a78-c92d-49f4-9765-41f4251e2753"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 52,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "f030cd70-c9cd-4b30-b23c-521464d71035"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 53,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "28fe8104-3370-4802-ad89-f6f3a1cb5987"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 54,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "cb8f6ca9-80cf-4625-b455-a63a944f5270"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 55,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "54f8da6f-b559-4185-a215-772fa906e74f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 56,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "a77e50ea-d5c0-4b16-b3b0-64d5c0f27f3b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 57,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "c428b650-75a6-4bfd-824e-bd7b8d1ffaae"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 58,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "724ad8a0-6a16-4b5e-9156-422f8dae28bc"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 59,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "13f678a5-1906-4e02-b308-19c0287d584e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 60,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "6f4304a6-2eef-4437-ab44-bccd92b81b7d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 61,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "b1828ae3-112d-4bd3-b4ae-5d73c9928384"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 62,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "48d55aea-0583-403f-853f-03c2bafa6d33"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 63,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "37c2627f-0574-42a3-9f88-0deebd9ecb30"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 64,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "8ed78e6b-dd4b-4a24-a172-87647c7dd46f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 65,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "2fdfbef3-2f7c-4b2a-8126-a507415e1591"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 66,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "f4d7e5cb-1f8a-48af-83b3-679b26a8cfab"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 67,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "526056a7-5abb-4fee-badc-87edd72396d0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 68,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "b3f5f1e8-2dd3-4cc3-aebc-9f0a7b3be59f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 69,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "c9220f17-026e-4d91-a8a7-e16f89aba292"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 70,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "cc5f1d54-9f5e-4895-a4f1-b5efda5676a2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 71,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "11d54025-1d48-4ae0-8eae-b2ed431e5ff1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 72,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "adc5b06a-90a4-42c6-986c-e31b84d78384"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 73,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "5e4e25a2-4f2d-4a31-aeac-6dcc43dfc62c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 74,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "4ddbd81f-5484-4701-a196-a97cf76549e8"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 75,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "284b92f0-6e18-43af-a6f2-d1f84f2a777b"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 76,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "f31832a7-1095-4bdb-80aa-5112b3de49b9"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 77,
+      "cited_text": "Missing Attribution (Ex. F.6): Claims made in the responses often lack source attribution. Web agents are usually designed or trained on web navigation or citation-free information-seeking tasks. Therefore, in contrast to AI search systems, Operator struggles to follow our instructions to provide attribution. Moreover, LLMs with massive parametric memory sometimes tend to directly produce or hallucinate information without conducting actual searches, even though most of our tasks do require them to search online in order to provide up-to-date information and attribution.",
+      "start_char": 37318,
+      "end_char": 37895,
+      "chunk_id": "7174a57b-3dc5-4864-82f6-d768a92be222"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 78,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "954ad65b-64e7-44aa-9e74-e3421d923d76"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 79,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "1e2020e5-0ae5-4ab3-8578-3ecbaf298c34"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 80,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "a95ecab3-2d46-4a6e-bd8c-a68abfa830d7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 81,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "bd3302d8-1f58-4be6-ae24-cbd67003074f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 82,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "52106466-9981-4f1a-b260-fb6291bf5637"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 83,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "b09c34d1-e83e-4f65-a1cf-82ee456d935f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 84,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "9fe8919c-e24b-4f88-bfdb-52ee56933fc3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 85,
+      "cited_text": "Missing Attribution (Ex. F.6): Claims made in the responses often lack source attribution. Web agents are usually designed or trained on web navigation or citation-free information-seeking tasks. Therefore, in contrast to AI search systems, Operator struggles to follow our instructions to provide attribution. Moreover, LLMs with massive parametric memory sometimes tend to directly produce or hallucinate information without conducting actual searches, even though most of our tasks do require them to search online in order to provide up-to-date information and attribution.",
+      "start_char": 37318,
+      "end_char": 37895,
+      "chunk_id": "1802b856-90c1-4086-a249-7b863918758c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 86,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "e3990925-1ef7-4f7b-9239-428af38d063c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 87,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "725b1254-e00d-4afa-b409-3b57ae609913"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 88,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "b801d615-cd60-4363-86e6-d0b718c8c30f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 89,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "04fd0c52-007a-4ed3-aba6-fcf4401bbcdf"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 90,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "753d7df3-2bcf-4179-ab97-01918838a3a4"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 91,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "093c3836-69cb-4cf1-aa2e-840b5afc74e3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 92,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "f8bfa3e3-a07f-4372-ae6f-feadd6a70a20"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 93,
+      "cited_text": "Missing Attribution (Ex. F.6): Claims made in the responses often lack source attribution. Web agents are usually designed or trained on web navigation or citation-free information-seeking tasks. Therefore, in contrast to AI search systems, Operator struggles to follow our instructions to provide attribution. Moreover, LLMs with massive parametric memory sometimes tend to directly produce or hallucinate information without conducting actual searches, even though most of our tasks do require them to search online in order to provide up-to-date information and attribution.",
+      "start_char": 37318,
+      "end_char": 37895,
+      "chunk_id": "e75303a5-2474-4fb0-82f2-0c52deda76dd"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 94,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "4bf76174-0085-4ffa-9683-933f578a82c6"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 95,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "39cf8249-04e8-4d2e-ae38-ad56b5bbd6f0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 96,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "a10815de-fdb5-478f-85d3-48fe4c378bc7"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 97,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "7375ba54-d3c9-4780-839d-9f2d5968b123"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 98,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "6b3d487d-4ca6-4b80-b501-42d05f97fdaf"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 99,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "2a1a5aed-639f-4844-8fa5-b70efd149586"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 100,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "b0087f5a-6292-4824-a7e4-33bd0515ea63"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 101,
+      "cited_text": "Missing Attribution (Ex. F.6): Claims made in the responses often lack source attribution. Web agents are usually designed or trained on web navigation or citation-free information-seeking tasks. Therefore, in contrast to AI search systems, Operator struggles to follow our instructions to provide attribution. Moreover, LLMs with massive parametric memory sometimes tend to directly produce or hallucinate information without conducting actual searches, even though most of our tasks do require them to search online in order to provide up-to-date information and attribution.",
+      "start_char": 37318,
+      "end_char": 37895,
+      "chunk_id": "794fd434-e9e5-40c8-854c-a5d87a3e07e3"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 102,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "604796f8-2c48-426d-b087-e03fbbbd939d"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 103,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "9b8ddbe4-0f09-4e56-8b4c-be1c510da6e2"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 104,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "bc4d0ba8-e220-40c6-a0ce-b3da2079ac64"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 105,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "21ce640a-6cb3-4ed4-ad78-300e89ff0031"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 106,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "8008a997-f119-4c79-aaf6-a486eb5dae1f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 107,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "64101d02-6842-4ff3-b7cd-516b306fd0ed"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 108,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "799d62f7-3fa8-4ce2-9a4c-bd3153c702ae"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 109,
+      "cited_text": "Missing Attribution (Ex. F.6): Claims made in the responses often lack source attribution. Web agents are usually designed or trained on web navigation or citation-free information-seeking tasks. Therefore, in contrast to AI search systems, Operator struggles to follow our instructions to provide attribution. Moreover, LLMs with massive parametric memory sometimes tend to directly produce or hallucinate information without conducting actual searches, even though most of our tasks do require them to search online in order to provide up-to-date information and attribution.",
+      "start_char": 37318,
+      "end_char": 37895,
+      "chunk_id": "721cc21e-9b94-4a43-be9a-df4e81d92549"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 110,
+      "cited_text": "The problem is compounded when the outcome itself is unverifiable. Unlike mathematical reasoning or code generation, where a final answer can be checked against a reference or an execution environment, social intelligence or creative writing tasks rely on subjective quality metrics.[6, 7] For instance, in the SOTOPIA social benchmark, goal completion is assessed by a model-based judge rather than a deterministic rule, introducing potential biases and vulnerabilities to reward hacking.[2, 8, 9] Reward hacking, or overoptimization, describes the phenomenon where a policy exploits flaws in the reward model\u2014such as favoring verbose or sycophantic responses\u2014to inflate scores without improving actual task performance.[10, 11]",
+      "start_char": 2514,
+      "end_char": 3243,
+      "chunk_id": "2b3b14ec-a263-48ff-8ace-e3bc2444ac8c"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 111,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "7fd00e82-0753-41d8-8d44-562d0458dae0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 112,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "b8798c11-dd45-411b-afe0-12b8ed7efa78"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 113,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "f03ff1df-9b75-4c0f-8e98-84f53638984f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 114,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "52a708ff-47f1-4967-9fe6-390babd65b87"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 115,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "03dd71df-7fd4-4972-8929-9438e8116c1e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 116,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "0c10f7e7-54ea-4f2e-8eb7-46823551d11e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 117,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "fbf5e41f-7f79-4ba8-b57a-fbe68e98d4a1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 118,
+      "cited_text": "Missing Attribution (Ex. F.6): Claims made in the responses often lack source attribution. Web agents are usually designed or trained on web navigation or citation-free information-seeking tasks. Therefore, in contrast to AI search systems, Operator struggles to follow our instructions to provide attribution. Moreover, LLMs with massive parametric memory sometimes tend to directly produce or hallucinate information without conducting actual searches, even though most of our tasks do require them to search online in order to provide up-to-date information and attribution.",
+      "start_char": 37318,
+      "end_char": 37895,
+      "chunk_id": "4ba2163f-0645-455d-b172-46c7a609ab49"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 119,
+      "cited_text": "The problem is compounded when the outcome itself is unverifiable. Unlike mathematical reasoning or code generation, where a final answer can be checked against a reference or an execution environment, social intelligence or creative writing tasks rely on subjective quality metrics.[6, 7] For instance, in the SOTOPIA social benchmark, goal completion is assessed by a model-based judge rather than a deterministic rule, introducing potential biases and vulnerabilities to reward hacking.[2, 8, 9] Reward hacking, or overoptimization, describes the phenomenon where a policy exploits flaws in the reward model\u2014such as favoring verbose or sycophantic responses\u2014to inflate scores without improving actual task performance.[10, 11]",
+      "start_char": 2514,
+      "end_char": 3243,
+      "chunk_id": "2ebff416-808c-4472-93fd-31343da2780e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 120,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "7fd00e82-0753-41d8-8d44-562d0458dae0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 121,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "b8798c11-dd45-411b-afe0-12b8ed7efa78"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 122,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "f03ff1df-9b75-4c0f-8e98-84f53638984f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 123,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "52a708ff-47f1-4967-9fe6-390babd65b87"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 124,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "03dd71df-7fd4-4972-8929-9438e8116c1e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 125,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "0c10f7e7-54ea-4f2e-8eb7-46823551d11e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 126,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "fbf5e41f-7f79-4ba8-b57a-fbe68e98d4a1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 127,
+      "cited_text": "Missing Attribution (Ex. F.6): Claims made in the responses often lack source attribution. Web agents are usually designed or trained on web navigation or citation-free information-seeking tasks. Therefore, in contrast to AI search systems, Operator struggles to follow our instructions to provide attribution. Moreover, LLMs with massive parametric memory sometimes tend to directly produce or hallucinate information without conducting actual searches, even though most of our tasks do require them to search online in order to provide up-to-date information and attribution.",
+      "start_char": 37318,
+      "end_char": 37895,
+      "chunk_id": "4ba2163f-0645-455d-b172-46c7a609ab49"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 128,
+      "cited_text": "The problem is compounded when the outcome itself is unverifiable. Unlike mathematical reasoning or code generation, where a final answer can be checked against a reference or an execution environment, social intelligence or creative writing tasks rely on subjective quality metrics.[6, 7] For instance, in the SOTOPIA social benchmark, goal completion is assessed by a model-based judge rather than a deterministic rule, introducing potential biases and vulnerabilities to reward hacking.[2, 8, 9] Reward hacking, or overoptimization, describes the phenomenon where a policy exploits flaws in the reward model\u2014such as favoring verbose or sycophantic responses\u2014to inflate scores without improving actual task performance.[10, 11]",
+      "start_char": 2514,
+      "end_char": 3243,
+      "chunk_id": "2ebff416-808c-4472-93fd-31343da2780e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 129,
+      "cited_text": "Agentic search systems typically produce lengthy, time-varying answers (e.g., the product catalog of a shopping website constantly changes) ranging from hundreds to thousands of words on these tasks. The complexity is far beyond what conventional LLM-as-a-Judge [ 45 ] methods are used for. Therefore, we propose a novel Agent-as-a-Judge framework to automatically yet reliably evaluate such complex answers. The key insight behind our evaluation methodology lies in the generation-verification asymmetry: while the generated answers can vary substantially across agents, search strategies, or query times, we know a priori what each task is looking for and can design a task-specific rubric to specify the evaluation logic. At a high level, a rubric evaluates two main aspects of an answer: correctness (i.e., whether the answer satisfies all the requirements of the task) and attribution (i.e., whether every statement in the answer can be attributed to the cited sources). At the operational level, a rubric is structured as a tree that breaks down the evaluation into hierarchical evaluation nodes, where each leaf node conforms to a binary judgment and the internal nodes aggregate and propagate the results toward the root following various aggregation logic. Given a task, we develop a task-specific judge agent, an agentic workflow interleaving LLM-based information extraction, LLM-as-a-Judge, and tool calls following our unified rubric design, to automatically evaluate complex answers from agentic search systems (see Figure 1 for illustration). Due to the complexity of our tasks, the rubric trees are also highly complex, with an average of 50 nodes and a max of 603 nodes (Table 2 (a)). Yet, rigorous human evaluation of our judge agents shows an evaluation accuracy of 99%, demonstrating their exceptional reliability ( \u00a74.4) .",
+      "start_char": 9075,
+      "end_char": 10916,
+      "chunk_id": "7fd00e82-0753-41d8-8d44-562d0458dae0"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 130,
+      "cited_text": "3.3 Rubric Tree",
+      "start_char": 18443,
+      "end_char": 18458,
+      "chunk_id": "b8798c11-dd45-411b-afe0-12b8ed7efa78"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 131,
+      "cited_text": "3.4 Rubric-based Judge Agent",
+      "start_char": 21502,
+      "end_char": 21530,
+      "chunk_id": "f03ff1df-9b75-4c0f-8e98-84f53638984f"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 132,
+      "cited_text": "in Figure 2 as an example, the Extractor extracts the corresponding bits of information from the answer, and the Verifier examines the extracted text and the screenshot of the corresponding webpage to determine if the statement is indeed true.",
+      "start_char": 22217,
+      "end_char": 22460,
+      "chunk_id": "52a708ff-47f1-4967-9fe6-390babd65b87"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 133,
+      "cited_text": "3.2 Task Collection",
+      "start_char": 16873,
+      "end_char": 16892,
+      "chunk_id": "03dd71df-7fd4-4972-8929-9438e8116c1e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 134,
+      "cited_text": "Struggle with Time-Varying Tasks. We hypothesize that agentic search systems equipped with no or only limited browsing features might perform worse on time-varying tasks compared to time-invariant tasks. Many of those tasks inherently require live web interactions, for instance, verifying hotel room availability on a specific date. Without real-time browsing, agents often provide outdated or hallucinated information. We identify 57 tasks that are explicitly time-varying (i.e., tasks explicitly associated with relative dates/times, or requiring information like product prices that frequently changes over time). As shown in Figure 4, most of the evaluated systems perform worse on this subset than on the remaining tasks, which supports our hypothesis. Interestingly, OpenAI Operator and human participants, both excelling at interacting with live websites, achieve relatively on-par or superior performance on time-varying tasks. In addition to real-time information, some tasks, such as those requiring advanced filters or visual understanding, also favor browser interaction over search APIs. These collectively highlight the importance of integrating web browsing into agentic search systems, likely contributing substantially to OpenAI Deep Research's superior performance over the other Deep Research systems.",
+      "start_char": 31324,
+      "end_char": 32645,
+      "chunk_id": "0c10f7e7-54ea-4f2e-8eb7-46823551d11e"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 135,
+      "cited_text": "Invalid Attribution (Ex. F.5): We often observe expired and fabricated URLs from the answers. One potential reason could be that agents generate URLs directly without actually accessing the webpages. For instance, in a task requiring an Amazon purchase link, HF Open Deep Research directly fabricates a link without accessing Amazon. Surprisingly, Operator also has a high percentage of this error type, even though it actually accesses websites as humans do. From the trajectories, we find that it often mistakenly reports incorrect URLs in its final responses even though it has successfully accessed the correct webpages, which may be partially due to the challenge of generating answers grounded in a long context. For example, in a fellowship identification task, Operator navigates correctly to the correct page but ultimately reports a link that differs by a few words from the correct link.",
+      "start_char": 36420,
+      "end_char": 37318,
+      "chunk_id": "fbf5e41f-7f79-4ba8-b57a-fbe68e98d4a1"
+    },
+    {
+      "source_id": "139f2e67-4e7f-425f-9f24-f543396b46f8",
+      "citation_number": 136,
+      "cited_text": "Missing Attribution (Ex. F.6): Claims made in the responses often lack source attribution. Web agents are usually designed or trained on web navigation or citation-free information-seeking tasks. Therefore, in contrast to AI search systems, Operator struggles to follow our instructions to provide attribution. Moreover, LLMs with massive parametric memory sometimes tend to directly produce or hallucinate information without conducting actual searches, even though most of our tasks do require them to search online in order to provide up-to-date information and attribution.",
+      "start_char": 37318,
+      "end_char": 37895,
+      "chunk_id": "4ba2163f-0645-455d-b172-46c7a609ab49"
+    },
+    {
+      "source_id": "176e7460-4196-4d9c-8445-93696ed784b3",
+      "citation_number": 137,
+      "cited_text": "The problem is compounded when the outcome itself is unverifiable. Unlike mathematical reasoning or code generation, where a final answer can be checked against a reference or an execution environment, social intelligence or creative writing tasks rely on subjective quality metrics.[6, 7] For instance, in the SOTOPIA social benchmark, goal completion is assessed by a model-based judge rather than a deterministic rule, introducing potential biases and vulnerabilities to reward hacking.[2, 8, 9] Reward hacking, or overoptimization, describes the phenomenon where a policy exploits flaws in the reward model\u2014such as favoring verbose or sycophantic responses\u2014to inflate scores without improving actual task performance.[10, 11]",
+      "start_char": 2514,
+      "end_char": 3243,
+      "chunk_id": "2ebff416-808c-4472-93fd-31343da2780e"
+    }
+  ]
+}
