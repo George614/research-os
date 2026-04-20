@@ -10,6 +10,30 @@ obsidian-vault/.obsidian/workspace.json
 obsidian-vault/.obsidian/workspace-mobile.json
 obsidian-vault/.obsidian/workspaces.json
 
+# User data — the repo is the *system*, not a content store.
+# Keep the mind2web2-agentic-search demo as a worked example; ignore everything else.
+obsidian-vault/literature/*/
+!obsidian-vault/literature/mind2web2-agentic-search/
+obsidian-vault/maps/*/
+!obsidian-vault/maps/mind2web2-agentic-search/
+obsidian-vault/distilled/*/
+!obsidian-vault/distilled/mind2web2-agentic-search/
+obsidian-vault/projects/*.md
+obsidian-vault/experiments/*.md
+
+# Per-paper artifacts — worked-example files already tracked; ignore new ones.
+sources/*
+!sources/.gitkeep
+exports/*
+!exports/.gitkeep
+!exports/mind2web2-*
+scratch/*
+!scratch/.gitkeep
+!scratch/probe*.json
+!scratch/probe*.stderr
+!scratch/all_probes_digest.md
+!scratch/source_index.txt
+
 # Python / Jupyter (future scripts)
 __pycache__/
 *.pyc
